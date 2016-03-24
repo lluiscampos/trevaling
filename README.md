@@ -5,4 +5,4 @@ PHILAE
 
 Requirements:
 
-apt-get install libboost-test-dev
+apt-get install libboost-test-dev lcov

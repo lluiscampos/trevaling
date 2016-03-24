@@ -1,2 +1,4 @@
-philae/bin
-philae/build
+philae/bin/
+philae/build/
+philae/coverage/
+philae/coverage.info

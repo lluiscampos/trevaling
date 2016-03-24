@@ -12,7 +12,7 @@ TESTER := $(BINDIR)/tester
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g -Wall
+CFLAGS := -g -Wall --coverage
 
 $(TARGET): $(OBJECTS)
 	@mkdir -p $(BINDIR)
@@ -24,11 +24,17 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 clean:
 	@echo " Cleaning..."; 
-	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
+	$(RM) -r $(BUILDDIR) $(TARGET) coverage
 
 tester: $(OBJECTS)
 	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) build/test_philae.o build/philae.o -o $(TESTER)
+	$(CC) $(CFLAGS) -c -I$(SRCDIR) -o $(BUILDDIR)/test_philae.o test/test_philae.cpp
+	$(CC) $(CFLAGS) -I$(SRCDIR) build/test_philae.o build/philae.o -o $(TESTER)
+
+test: tester
+	./$(TESTER)
+	lcov --capture --no-external --directory . --output-file coverage.info
+	genhtml coverage.info --output-directory coverage
 
 .PHONY: clean
 
