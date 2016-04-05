@@ -1,14 +1,14 @@
 #
 # Philae Makefile
 #
- 
+
 CC := g++
 SRCDIR := src
 BUILDDIR := build
 BINDIR := bin
 TARGET := $(BINDIR)/philae
 TESTER := $(BINDIR)/tester
- 
+
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
@@ -23,7 +23,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	@echo " Cleaning..."; 
+	@echo " Cleaning...";
 	$(RM) -r $(BUILDDIR) $(TARGET) coverage
 
 tester: $(OBJECTS)
@@ -36,5 +36,8 @@ test: tester
 	lcov --capture --no-external --directory . --output-file coverage.info
 	genhtml coverage.info --output-directory coverage
 
-.PHONY: clean
+particle:
+	particle compile electron src/main.ino src/philae.h src/philae.cpp --saveTo firmware.bin
+	sudo particle flash --serial firmware.bin
 
+.PHONY: clean
