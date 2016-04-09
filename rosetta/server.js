@@ -1,33 +1,16 @@
-var http = require('http');
+var express = require('express');
 var fs = require('fs');
 
-http.createServer(function (request, response) {
+var app = express();
 
-	response.writeHead( 200, {'Content-Type': 'text/html'});
-	switch(request.url){
-	
-		case '/':
-			template = "index.html";
-			break;
-		
-		case '/api':
+app.use(express.static( __dirname + '/public'))
 
-			template = "api.html";
-			break;
-		
-		default:
+app.get('/', function(request, response){
 
-			template = "404.html";
-			break;
-	}
+	response.sendFile('index.html')
+});
 
-	fs.readFile("./templates/" + template, function(error, data){
+app.listen(3000, function(){
 
-		response.write(data);
-		response.end();
-	});
-
-
-}).listen(3000,'localhost');
-
-console.log('Server http://localhost:3000');
+	console.log('listen port 3000')
+});
