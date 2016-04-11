@@ -1,5 +1,9 @@
 extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+block content	
+p Welcome to #{title}
+	div.contenedor	
+		each item in position
+			= item.date
+			= item.longitude
+			= item.latitude
