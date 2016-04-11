@@ -1,0 +1,20 @@
+{
+  "name": "rosetta",
+  "description": "",
+  "main": "www/js/app.js",
+  "authors": [
+    "Lluis M. Campos <lluiscampos@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/lluiscampos/trevaling",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "milligram": "^1.1.0"
+  }
+}

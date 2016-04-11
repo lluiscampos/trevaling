@@ -4,3 +4,5 @@ philae/coverage/
 philae/coverage.info
 rosetta/node_modules
 client/node_modules
+client/bower_components
+client/www/css
