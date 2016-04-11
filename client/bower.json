@@ -3,7 +3,8 @@
   "description": "",
   "main": "www/js/app.js",
   "authors": [
-    "Lluis M. Campos <lluiscampos@gmail.com>"
+    "Lluis M. Campos <lluiscampos@gmail.com>",
+    "Cristian Travé <cristian.trave@gmail.com>"
   ],
   "license": "MIT",
   "homepage": "https://github.com/lluiscampos/trevaling",
