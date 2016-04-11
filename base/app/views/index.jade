@@ -1,9 +1,6 @@
 extends layout
 
-block content	
-p Welcome to #{title}
-	div.contenedor	
-		each item in position
-			= item.date
-			= item.longitude
-			= item.latitude
+block content
+	p Welcome to #{title}
+	div.position
+

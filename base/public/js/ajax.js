@@ -1,10 +1,11 @@
 $( document ).ready(function() {
 	$.ajax({
 		type:"GET",
-		url:"/apiposition",
+		url:"/position.json",
 		success: function(data) {
 			$('.position').text(JSON.stringify(data));
 		},
-		dataType: 'jsonp',
+		dataType: 'json',
 	});
+
 });

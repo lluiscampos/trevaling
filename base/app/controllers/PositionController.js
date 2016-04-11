@@ -7,16 +7,18 @@ module.exports = function(app){
 	app.use('/',router);
 };
 
-router.get('/viewposition',function(request, response, next){
+router.get('/position.json',function(request, response, next){
 
 	Position.find(function(err, position){
 		if (err) return next(err);
 
 		response.json({ position: position});
-
+		/*
 		response.render('index',{
 
+			title: 'Philae Trip',
 			position: position
 		});
+*/
 	});
 });
