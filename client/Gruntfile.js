@@ -20,7 +20,8 @@ module.exports = function(grunt) {
           destPrefix: 'www'
         },
         files: {
-          'css/milligram.min.css' : 'milligram/dist/milligram.min.css'
+          'css/milligram.min.css' : 'milligram/dist/milligram.min.css',
+          'css/normalize.css' : 'normalize.css/normalize.css'
         }
       }
     }
@@ -30,6 +31,5 @@ module.exports = function(grunt) {
   // Each plugin must be loaded following this pattern
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-bowercopy');
-
 
 };
