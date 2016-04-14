@@ -32,5 +32,5 @@ app.get('/viewer', function(request, response){
 
 app.listen(3000, function(){
 
-	console.log('listen port 3000')
+	console.log('listen port 3000');
 });

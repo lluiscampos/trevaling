@@ -1,1 +1,1 @@
-console.log("roseta initialized")
+console.log("roseta initialized");
