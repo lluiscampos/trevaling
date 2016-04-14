@@ -20,8 +20,11 @@ module.exports = function(grunt) {
           destPrefix: 'www'
         },
         files: {
-          'css/milligram.min.css' : 'milligram/dist/milligram.min.css',
-          'css/normalize.css' : 'normalize.css/normalize.css'
+          'css/milligram.css'     : 'milligram/dist/milligram.css',
+          'css/normalize.css'     : 'normalize.css/normalize.css',
+          'js/libs/jquery.js'     : 'jquery/dist/jquery.js',
+          'js/libs/underscore.js' : 'underscore/underscore.js',
+          'js/libs/backbone.js'   : 'backbone/backbone.js'
         }
       }
     }
