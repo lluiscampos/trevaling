@@ -21,7 +21,7 @@ Install in Ubuntu:
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash -
 ```
 
-## Client
+## Rosetta
 
 Install dependencies:
 ```
