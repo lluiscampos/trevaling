@@ -1,5 +1,17 @@
 # trevaling
 
+Trevaling is about traveling, traveling is about learning, learning is about coding, and coding is about trevaling
+```
+
+   PHILAE                             COMET67P             ROSETTA
+   _____|--)         _                _________            _________
+  |     |          (`  ).            |         |          |         |
+  | C++ | <----> (       '`.  <----> | node.js |  <---->  | html/js |
+  |_____|        (         )         |_________|          |_________|
+                  ` __.:'-'
+
+```
+
 ## Shared requirements
 
 Need to install node.js v0.12
@@ -9,12 +21,7 @@ Install in Ubuntu:
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash -
 ```
 
-Install in Windows:
-```
-????
-```
-
-# Client
+## Client
 
 Install dependencies:
 ```
@@ -32,7 +39,7 @@ Run lint:
 grunt jshint
 ```
 
-# Philae
+## Philae
 
 Install dependencies (ubuntu):
 ```
