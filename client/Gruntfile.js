@@ -11,6 +11,15 @@ module.exports = function(grunt) {
       files: ['www/js/*.js']
     },
 
+    json_server: {
+        options: {
+            port: 13337,
+            hostname: 'localhost',
+            db: 'api.json'
+        },
+        my_target : {}
+    },
+
     bowercopy: {
       options: {
         srcPrefix: 'bower_components'
@@ -34,5 +43,6 @@ module.exports = function(grunt) {
   // Each plugin must be loaded following this pattern
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-bowercopy');
+  grunt.loadNpmTasks('grunt-json-server');
 
 };

@@ -4,6 +4,7 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-bowercopy": "^1.2.4",
-    "grunt-contrib-jshint": "^1.0.0"
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-json-server": "^0.1.2"
   }
 }

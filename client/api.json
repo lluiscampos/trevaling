@@ -1,0 +1,14 @@
+{
+  "trips": [
+    {
+      "id": 1,
+      "title": "first-trip",
+      "locations": [
+        {
+          "time": "now",
+          "latitud": "sur"
+        }
+      ]
+    }
+  ]
+}

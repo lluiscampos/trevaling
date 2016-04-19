@@ -1,8 +1,7 @@
 
 var PhilaeTrip = Backbone.Model.extend({
 
-  //TODO: We need some sort of backend go get this working
-  url: '',
+  url: 'http://localhost:13337/trips/1',
 
   defaults: {
     title: "loading...",
