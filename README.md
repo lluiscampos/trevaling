@@ -38,6 +38,12 @@ Run lint:
 ```
 grunt jshint
 ```
+## comet67p
+
+Install dependencies:
+```
+npm install express
+npm install --production taffy
 
 ## Philae
 
