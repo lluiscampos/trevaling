@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "title": "first-trip",
+        "locations": [
+            {
+                "time": "now",
+                "latitud": "sur"
+            }
+        ],
+        "___id": "T000002R000002",
+        "___s": true
+    }
+]
