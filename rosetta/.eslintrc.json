@@ -2,5 +2,8 @@
   "extends": "eslint:recommended",
   "rules": {
     "no-trailing-spaces": "error"
+  },
+  "env": {
+    "browser": true
   }
 }

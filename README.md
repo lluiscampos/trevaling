@@ -57,7 +57,7 @@ grunt bowercopy
 
 Run lint:
 ```
-grunt jshint
+grunt eslint
 ```
 
 ## Comet67P
@@ -65,6 +65,16 @@ grunt jshint
 Install dependencies:
 ```
 npm install
+```
+
+Run lint:
+```
+grunt eslint
+```
+
+Start server:
+```
+npm start
 ```
 
 ## Philae

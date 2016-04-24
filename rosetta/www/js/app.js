@@ -1,10 +1,12 @@
 
+/* global Backbone, _, $ */
+
 var PhilaeTrip = Backbone.Model.extend({
 
   url: 'http://localhost:13337/trips/1',
 
   defaults: {
-    title: "loading...",
+    title: "loading..."
   }
 
 });
