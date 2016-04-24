@@ -16,13 +16,12 @@ Trevaling is about traveling, traveling is about learning, learning is about cod
 
 ### node ecosystem
 
-Rosetta and Comet67P require node.js v4 or higher
-From Ubuntu 16.04 onwards the official Ubuntu repositories can be used:
+Rosetta and Comet67P require node.js v4 or higher. From Ubuntu 16.04 onwards the official Ubuntu repositories can be used:
 ```
 apt-get install nodejs npm
 ```
 
-For older Ubuntu versions it is required to use nodesource script:
+For older Ubuntu versions, it is required to use nodesource script:
 ```
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 apt-get install nodejs npm
@@ -31,6 +30,11 @@ apt-get install nodejs npm
 Once nodejs and npm are installed, install grunt and bower:
 ```
 npm install -g grunt bower
+```
+
+Tip: install nodejs-legacy or create a manual symlink to deal with legacy code expecting "node" to be nodejs on Ubuntu/Debian systems.
+```
+apt-get install nodejs-legacy
 ```
 
 ### particle.io ecosystem
