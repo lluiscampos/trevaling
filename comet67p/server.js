@@ -9,11 +9,11 @@ var db = TAFFY(''+jsondb);
 
 var app = express();
 
-app.use(express.static( __dirname + '/public'))
+app.use(express.static( __dirname + '/public'));
 
 app.get('/', function(request, response){
 
-	response.sendFile('index.html')
+	response.sendFile('index.html');
 });
 
 app.get('/philae', function(request, response, next){
@@ -28,27 +28,26 @@ app.get('/philae', function(request, response, next){
           			"latitud": "sur"
         		}
       		]
-    	}
-  	,function(err){
+    	},
+  	  function(err){
   		if(err){
   			return next({message: 'failed to query db (insert)', status: 500});
   		}
 
   	});
-		
+
 	console.log(db().get());
 
 	try {
 
-		fs.writeFileSync("db.json", JSON.stringify(db().get(), null, 4));	
-  
+		fs.writeFileSync("db.json", JSON.stringify(db().get(), null, 4));
+
 	} catch (err) {
 
   		return next({message: 'failed to query db (Sync)', status: 500});
 	}
-	
 
-	response.send(200);  
+	response.send(200);
 });
 
 app.get('/viewer', function(request, response){
