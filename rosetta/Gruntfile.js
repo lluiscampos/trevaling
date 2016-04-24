@@ -1,14 +1,11 @@
 module.exports = function(grunt) {
 
-  // Project configuration.
   grunt.initConfig({
-    // This line makes your node configurations available for use
+
     pkg: grunt.file.readJSON('package.json'),
-    // This is where we configure JSHint
-    jshint: {
-      // You get to make the name
-      // The paths tell JSHint which files to validate
-      files: ['www/js/*.js']
+
+    eslint: {
+      src: ["www/js/app.js"]
     },
 
     json_server: {
@@ -40,8 +37,7 @@ module.exports = function(grunt) {
 
   });
 
-  // Each plugin must be loaded following this pattern
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks("gruntify-eslint");
   grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-json-server');
 

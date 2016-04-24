@@ -3,12 +3,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    jshint: {
-      files: ['server.js']
-    }
+    eslint: {
+      src: ["server.js"]
+    },
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks("gruntify-eslint");
 
 };
