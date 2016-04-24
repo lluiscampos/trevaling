@@ -12,14 +12,31 @@ Trevaling is about traveling, traveling is about learning, learning is about cod
 
 ```
 
-## Shared requirements
+## Requirements
 
-Need to install node.js v0.12
+### node ecosystem
 
-Install in Ubuntu:
+Rosetta and Comet67P require node.js v4 or higher
+From Ubuntu 16.04 onwards the official Ubuntu repositories can be used:
 ```
-curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash -
+apt-get install nodejs npm
 ```
+
+For older Ubuntu versions it is required to use nodesource script:
+```
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+apt-get install nodejs npm
+```
+
+Once nodejs and npm are installed, install grunt and bower:
+```
+npm install -g grunt bower
+```
+
+### particle.io ecosystem
+
+For Philae... [TODO]
+
 
 ## Rosetta
 
@@ -38,13 +55,15 @@ Run lint:
 ```
 grunt jshint
 ```
-## comet67p
+
+## Comet67P
 
 Install dependencies:
 ```
 npm install express
 npm install --production taffy
 ```
+
 ## Philae
 
 Install dependencies (ubuntu):
