@@ -64,8 +64,7 @@ grunt jshint
 
 Install dependencies:
 ```
-npm install express
-npm install --production taffy
+npm install
 ```
 
 ## Philae
