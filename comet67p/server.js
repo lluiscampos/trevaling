@@ -9,13 +9,6 @@ var db = TAFFY(''+jsondb);
 
 var app = express();
 
-app.use(express.static( __dirname + '/public'));
-
-app.get('/', function(request, response){
-
-	response.sendFile('index.html');
-});
-
 app.get('/philae', function(request, response, next){
 
 	db.insert(
