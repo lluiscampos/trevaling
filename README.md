@@ -72,6 +72,11 @@ Run lint:
 grunt eslint
 ```
 
+Run tests:
+```
+npm test
+```
+
 Start server:
 ```
 npm start
