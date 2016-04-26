@@ -60,6 +60,8 @@ Run lint:
 grunt eslint
 ```
 
+To run the tests open the file test/index.html from a browser
+
 ## Comet67P
 
 Install dependencies:
