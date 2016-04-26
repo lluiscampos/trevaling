@@ -1,7 +1,8 @@
 {
   "extends": "eslint:recommended",
   "rules": {
-    "no-trailing-spaces": "error"
+    "no-trailing-spaces": "error",
+    "no-console": "off"
   },
   "env": {
     "node": true
