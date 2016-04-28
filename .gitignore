@@ -3,6 +3,7 @@ philae/build/
 philae/coverage/
 philae/coverage.info
 comet67p/node_modules
+comet67p/coverage
 rosetta/node_modules
 rosetta/bower_components
 rosetta/www/css

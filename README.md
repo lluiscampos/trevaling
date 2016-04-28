@@ -74,7 +74,7 @@ Run lint:
 grunt eslint
 ```
 
-Run tests:
+Run tests (with coverage):
 ```
 npm test
 ```
