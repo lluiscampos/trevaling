@@ -5,6 +5,7 @@
     "grunt": "^1.0.1",
     "grunt-bowercopy": "^1.2.4",
     "grunt-json-server": "^0.1.2",
+    "grunt-mocha-phantomjs": "^3.0.0",
     "gruntify-eslint": "^2.0.0"
   }
 }

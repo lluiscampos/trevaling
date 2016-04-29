@@ -60,7 +60,12 @@ Run lint:
 grunt eslint
 ```
 
-To run the tests open the file test/index.html from a browser
+To run the tests open the file test/index.html from a browser.
+
+Alternatively, grunt can be used:
+```
+grunt mocha_phantomjs
+```
 
 ## Comet67P
 

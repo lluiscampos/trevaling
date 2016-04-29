@@ -8,6 +8,13 @@ module.exports = function(grunt) {
       src: ["www/js/app.js"]
     },
 
+    mocha_phantomjs: {
+      options: {
+        reporter: 'spec'
+      },
+      all: ['test/index.html']
+    },
+
     json_server: {
         options: {
             port: 13337,
@@ -40,5 +47,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("gruntify-eslint");
   grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-json-server');
+  grunt.loadNpmTasks('grunt-mocha-phantomjs');
 
 };
