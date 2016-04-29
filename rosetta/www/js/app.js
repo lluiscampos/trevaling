@@ -27,7 +27,6 @@ var PhilaeTripView = Backbone.View.extend({
   },
 
   render: function() {
-    console.log("Rendering magic...");
     this.$el.html(this.template(this.model.toJSON()));
   }
 
@@ -37,7 +36,7 @@ var PhilaeTripView = Backbone.View.extend({
 $(document).ready(function() {
 
   var p = new PhilaeTrip();
-  var v = new PhilaeTripView({model: p});
+  new PhilaeTripView({model: p});
   p.fetch();
 
 });
