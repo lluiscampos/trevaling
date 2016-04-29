@@ -12,24 +12,22 @@ var app = express();
 
 app.get('/philae', function(request, response, next){
 
-	db.insert(
-    	{
-      		"id": 2,
-      		"title": "first-trip",
-      		"locations": [
-        		{
-          			"time": "now",
-          			"latitud": "sur"
-        		}
-      		]
-    	},
-  	  function(err){
-  		if(err){
-  			return next({message: 'failed to query db (insert)', status: 500});
-  		}
-
-  	});
-
+  db.insert(
+    {
+      "id": 2,
+      "title": "first-trip",
+      "locations": [
+        {
+          "time": "now",
+          "latitud": "sur"
+        }
+      ]
+    },
+    function(err){
+      if(err){
+        return next({message: 'failed to query db (insert)', status: 500});
+      }
+    });
 	console.log(db().get());
 
 	try {
@@ -38,7 +36,7 @@ app.get('/philae', function(request, response, next){
 
 	} catch (err) {
 
-  		return next({message: 'failed to query db (Sync)', status: 500});
+    return next({message: 'failed to query db (Sync)', status: 500});
 	}
 
 	response.send(200);
