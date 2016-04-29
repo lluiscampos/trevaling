@@ -1,5 +1,7 @@
 # trevaling
 
+[![Build Status](https://travis-ci.org/lluiscampos/trevaling.svg?branch=master)](https://travis-ci.org/lluiscampos/trevaling)
+
 Trevaling is about traveling, traveling is about learning, learning is about coding, and coding is about trevaling
 ```
 
