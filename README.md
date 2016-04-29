@@ -37,11 +37,6 @@ Tip: install nodejs-legacy or create a manual symlink to deal with legacy code e
 apt-get install nodejs-legacy
 ```
 
-### particle.io ecosystem
-
-For Philae... [TODO]
-
-
 ## Rosetta
 
 Install dependencies:
@@ -60,7 +55,12 @@ Run lint:
 grunt eslint
 ```
 
-To run the tests open the file test/index.html from a browser
+To run the tests open the file test/index.html from a browser.
+
+Alternatively, grunt can be used:
+```
+grunt mocha_phantomjs
+```
 
 ## Comet67P
 
@@ -107,3 +107,26 @@ Flash the device via serial:
 ```
 sudo particle flash --serial firmware.bin
 ```
+
+## References to documentation
+
+### javascript stack
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
+- https://nodejs.org/dist/latest-v4.x/docs/api/
+
+### comet67p libraries
+- http://expressjs.com/en/4x/api.html
+- https://github.com/typicaljoe/taffydb
+
+### rosetta libraries
+- http://underscorejs.org/
+- http://backbonejs.org/
+
+### nodejs developement tools
+- http://eslint.org/docs/rules/
+- https://mochajs.org/
+- http://chaijs.com/api/bdd/
+
+### philae
+- https://docs.particle.io/reference/firmware/electron/
+- https://docs.particle.io/reference/javascript/

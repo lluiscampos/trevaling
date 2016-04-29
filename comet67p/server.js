@@ -23,35 +23,33 @@ app.get('/philae', function(request, response, next){
         }
       ]
     },
-    function(err){
+    function(err) {
       if(err){
         return next({message: 'failed to query db (insert)', status: 500});
       }
-    });
-	console.log(db().get());
+    }
+  );
+  console.log(db().get());
 
-	try {
-
-		fs.writeFileSync("db.json", JSON.stringify(db().get(), null, 4));
-
-	} catch (err) {
-
+  try {
+    fs.writeFileSync("db.json", JSON.stringify(db().get(), null, 4));
+  }
+  catch (err) {
     return next({message: 'failed to query db (Sync)', status: 500});
-	}
+  }
 
-	response.send(200);
+  response.send(200);
 });
 
-app.get('/viewer', function(request, response){
+app.get('/viewer', function(request, response) {
 
-	// Show philae position tracking
-	// Get info with json and send to view
+  // Show philae position tracking
+  // Get info with json and send to view
 
-	response.setHeader('Content-Type', 'application/json');
-    response.send(JSON.stringify(db().get(), null, 4));
+  response.setHeader('Content-Type', 'application/json');
+  response.send(JSON.stringify(db().get(), null, 4));
 });
 
-app.listen(3000, function(){
-
-	console.log('listen port 3000');
+app.listen(3000, function() {
+  console.log('listen port 3000');
 });
