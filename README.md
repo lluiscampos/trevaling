@@ -111,22 +111,22 @@ sudo particle flash --serial firmware.bin
 ## References to documentation
 
 ### javascript stack
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
-https://nodejs.org/dist/latest-v4.x/docs/api/
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
+- https://nodejs.org/dist/latest-v4.x/docs/api/
 
 ### comet67p libraries
-http://expressjs.com/en/4x/api.html
-https://github.com/typicaljoe/taffydb
+- http://expressjs.com/en/4x/api.html
+- https://github.com/typicaljoe/taffydb
 
 ### rosetta libraries
-http://underscorejs.org/
-http://backbonejs.org/
+- http://underscorejs.org/
+- http://backbonejs.org/
 
 ### nodejs developement tools
-http://eslint.org/docs/rules/
-https://mochajs.org/
-http://chaijs.com/api/bdd/
+- http://eslint.org/docs/rules/
+- https://mochajs.org/
+- http://chaijs.com/api/bdd/
 
 ### philae
-https://docs.particle.io/reference/firmware/electron/
-https://docs.particle.io/reference/javascript/
+- https://docs.particle.io/reference/firmware/electron/
+- https://docs.particle.io/reference/javascript/
