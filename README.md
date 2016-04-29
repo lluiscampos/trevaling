@@ -1,6 +1,7 @@
 # trevaling
 
 [![Build Status](https://travis-ci.org/lluiscampos/trevaling.svg?branch=master)](https://travis-ci.org/lluiscampos/trevaling)
+[![Coverage Status](https://coveralls.io/repos/github/lluiscampos/trevaling/badge.svg?branch=master)](https://coveralls.io/github/lluiscampos/trevaling?branch=master)
 
 Trevaling is about traveling, traveling is about learning, learning is about coding, and coding is about trevaling
 ```
@@ -78,7 +79,7 @@ grunt eslint
 
 Run tests (with coverage):
 ```
-npm test
+npm test-cov
 ```
 
 Start server:

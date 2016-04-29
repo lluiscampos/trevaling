@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec",
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "test-cov": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec",
+    "test-coveralls" : "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js || true",
     "start": "node server.js"
   },
   "dependencies": {
@@ -12,10 +14,12 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
     "grunt": "^1.0.1",
     "gruntify-eslint": "^2.0.0",
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.2.0",
     "request": "^2.72.0"
   }
 }
