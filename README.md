@@ -91,6 +91,7 @@ npm start
 
 Install dependencies (ubuntu):
 ```
+pip install cpplint
 apt-get install libboost-test-dev lcov
 npm -g install particle-cli
 ```
@@ -98,7 +99,7 @@ npm -g install particle-cli
 Compile with gcc:
 ```
 make
-make tests
+make test
 ```
 
 Compile for particle:
