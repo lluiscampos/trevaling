@@ -4,8 +4,7 @@ dist: trusty
 
 before_install:
   - curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-  - sudo apt-get -qq update
-  - sudo apt-get install -y nodejs npm
+  - sudo apt-get install -y nodejs
   - sudo npm install -g grunt bower
   - sudo apt-get install -y libboost-test-dev lcov vera++
 
