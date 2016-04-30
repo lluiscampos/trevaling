@@ -11,4 +11,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks("gruntify-eslint");
 
+  grunt.registerTask('lint', ['eslint']);
+  grunt.registerTask('default', ['lint']);
+
 };

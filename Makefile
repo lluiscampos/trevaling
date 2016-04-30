@@ -6,6 +6,7 @@ travis: build lint_comet67p lint_rosetta test_comet67p test_rosetta coveralls er
 build:
 	cd comet67p && npm install
 	cd rosetta && npm install
+	cd rosetta && grunt build
 
 lint: clean lint_comet67p lint_rosetta error_check
 
@@ -16,16 +17,16 @@ comet67p: clean lint_comet67p test_comet67p
 rosetta: clean lint_comet67p test_comet67p
 
 lint_comet67p:
-	cd comet67p && ./node_modules/.bin/eslint server.js || touch ../error
+	cd comet67p && grunt lint || touch ../error
 
 lint_rosetta:
-	cd rosetta && ./node_modules/.bin/eslint www/js/app.js || touch ../error
+	cd rosetta && grunt lint || touch ../error
 
 test_comet67p:
 	cd comet67p && npm run test-cov || touch ../error
 
 test_rosetta:
-	cd rosetta && grunt mocha_phantomjs || touch ../error
+	cd rosetta && grunt test || touch ../error
 
 error_check:
 	test ! -e error

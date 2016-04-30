@@ -49,4 +49,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-json-server');
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
 
+  grunt.registerTask('lint', ['eslint']);
+  grunt.registerTask('build', ['bowercopy']);
+  grunt.registerTask('test', ['mocha_phantomjs']);
+  grunt.registerTask('default', ['lint', 'build', 'test']);
+
 };
