@@ -1,3 +1,4 @@
+/* Copyright (c) 2016 Trevaling */
 
 #include "philae.h"
 
@@ -11,7 +12,8 @@ void setup()
 
 void loop()
 {
-  if (Serial.available() > 0) {
+  if (Serial.available() > 0)
+  {
     // Read the incoming byte:
     incomingByte = Serial.read();
 
@@ -21,6 +23,6 @@ void loop()
 
     // Say where philae is
     Serial.print("Philae position: ");
-  	Serial.println(p.get_position());
+    Serial.println(p.get_position());
   }
 }

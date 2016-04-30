@@ -131,5 +131,6 @@ sudo particle flash --serial firmware.bin
 - http://chaijs.com/api/bdd/
 
 ### philae
+- https://bitbucket.org/verateam/vera/wiki/Rules
 - https://docs.particle.io/reference/firmware/electron/
 - https://docs.particle.io/reference/javascript/

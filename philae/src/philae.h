@@ -1,7 +1,10 @@
+/* Copyright (c) 2016 Trevaling */
+
 #ifndef PHILAE_H
 #define PHILAE_H
 
-class Philae { 
+class Philae
+{
 
 public:
 
@@ -17,4 +20,3 @@ private:
 };
 
 #endif
-

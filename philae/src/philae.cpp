@@ -1,9 +1,10 @@
+/* Copyright (c) 2016 Trevaling */
 
 #include "philae.h"
 
 Philae::Philae(void)
 {
-	last_position = 10;
+  last_position = 10;
 }
 
 Philae::~Philae(void)
@@ -13,5 +14,5 @@ Philae::~Philae(void)
 
 int Philae::get_position()
 {
-    return last_position;
+  return last_position;
 }
