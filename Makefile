@@ -32,7 +32,7 @@ error_check:
 
 coveralls: test
 	lcov -a comet67p/coverage/lcov.info -a philae/coverage.info -q -o coverage.info && \
-	cat ./coverage.info | ./comet67p/node_modules/coveralls/bin/coveralls.js || true
+	cat ./coverage.info | ./comet67p/node_modules/coveralls/bin/coveralls.js
 
 clean:
 	rm error 2> /dev/null || true
