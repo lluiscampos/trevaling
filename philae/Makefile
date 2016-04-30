@@ -26,18 +26,21 @@ clean:
 	@echo " Cleaning...";
 	$(RM) -r $(BUILDDIR) $(TARGET) coverage
 
-tester: $(OBJECTS)
+$(TESTER): $(OBJECTS)
 	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) -c -I$(SRCDIR) -o $(BUILDDIR)/test_philae.o test/test_philae.cpp
 	$(CC) $(CFLAGS) -I$(SRCDIR) build/test_philae.o build/philae.o -o $(TESTER)
 
-test: tester
+test: $(TESTER)
 	./$(TESTER)
-	lcov --capture --no-external --directory . --output-file coverage.info
+	lcov --capture --directory $(BUILDDIR) --output-file coverage.info
+	lcov --remove coverage.info "/usr/include/*" -o coverage.info
+
+coverage: test
 	genhtml coverage.info --output-directory coverage
 
 particle:
 	particle compile electron src/main.ino src/philae.h src/philae.cpp --saveTo firmware.bin
 	sudo particle flash --serial firmware.bin
 
-.PHONY: clean
+.PHONY: clean test coverage particle
