@@ -11,14 +11,15 @@
   <script src="../www/js/libs/jquery.js"></script>
   <script src="../www/js/libs/underscore.js"></script>
   <script src="../www/js/libs/backbone.js"></script>
-  <script src="../www/js/app.js"></script>
 
   <script src="../bower_components/mocha/mocha.js"></script>
   <script src="../bower_components/chai/chai.js"></script>
   <script>mocha.setup('bdd')</script>
+
+  <script src="instrumented-app.js"></script>
   <script src="test_something.js"></script>
   <script>
-    mocha.run();
+    if (navigator.userAgent.indexOf('PhantomJS') < 0) { mocha.run(); }
   </script>
 
 </body>

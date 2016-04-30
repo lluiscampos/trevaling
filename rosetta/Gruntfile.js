@@ -1,3 +1,7 @@
+
+var istanbul = require('browserify-istanbul');
+
+
 module.exports = function(grunt) {
 
   grunt.initConfig({
@@ -8,11 +12,28 @@ module.exports = function(grunt) {
       src: ["www/js/app.js"]
     },
 
-    mocha_phantomjs: {
+    browserify: {
+      coverage: {
+        files: {
+          'test/instrumented-app.js': 'www/js/app.js'
+        },
+        options: {
+          transform: [istanbul]
+        }
+      }
+    },
+
+    mocha: {
       options: {
-        reporter: 'spec'
+          run: true,
+          reporter: 'Spec',
+          coverage: {
+              lcovReport: 'coverage'
+          }
       },
-      all: ['test/index.html']
+      test: {
+          src: ['test/index.html']
+      }
     },
 
     json_server: {
@@ -47,11 +68,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("gruntify-eslint");
   grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-json-server');
-  grunt.loadNpmTasks('grunt-mocha-phantomjs');
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-mocha-phantom-istanbul');
 
   grunt.registerTask('lint', ['eslint']);
   grunt.registerTask('build', ['bowercopy']);
-  grunt.registerTask('test', ['mocha_phantomjs']);
+  grunt.registerTask('test', ['browserify:coverage', 'mocha']);
   grunt.registerTask('default', ['lint', 'build', 'test']);
 
 };

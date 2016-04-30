@@ -40,3 +40,7 @@ $(document).ready(function() {
   p.fetch();
 
 });
+
+// Keep var globals after instrumention
+window.PhilaeTrip = PhilaeTrip;
+window.PhilaeTripView = PhilaeTripView;

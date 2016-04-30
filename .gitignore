@@ -6,5 +6,7 @@ comet67p/node_modules
 comet67p/coverage
 rosetta/node_modules
 rosetta/bower_components
+rosetta/coverage
+rosetta/test/instrumented-*.js
 rosetta/www/css
 rosetta/www/js/libs

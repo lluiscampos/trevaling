@@ -78,8 +78,8 @@ error_check:
 error_clear:
 	rm error 2> /dev/null || true
 
-coverage.info:
-	lcov -a comet67p/coverage/lcov.info -a philae/coverage.info -q -o coverage.info
+coverage.info: comet67p/coverage/lcov.info rosetta/coverage/lcov.info philae/coverage.info
+	lcov -a comet67p/coverage/lcov.info -a rosetta/coverage/lcov.info -a philae/coverage.info -q -o coverage.info
 
 coveralls: coverage.info
 	cat ./coverage.info | ./comet67p/node_modules/coveralls/bin/coveralls.js
