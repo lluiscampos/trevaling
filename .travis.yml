@@ -3,10 +3,9 @@ node_js:
   - "4.2"
 
 before_install:
-  - npm install -g npm@3
+  - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
   - sudo apt-get -qq update
   - sudo apt-get install -y libboost-test-dev lcov
-  - sudo pip install cpplint
 
 script:
   - make build

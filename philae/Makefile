@@ -11,7 +11,6 @@ TESTER := $(BINDIR)/tester
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
-HEADERS := $(shell find $(SRCDIR) -type f -name *.h)
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 CFLAGS := -g -Wall --coverage
 
@@ -31,9 +30,6 @@ $(TESTER): $(OBJECTS)
 	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) -c -I$(SRCDIR) -o $(BUILDDIR)/test_philae.o test/test_philae.cpp
 	$(CC) $(CFLAGS) -I$(SRCDIR) build/test_philae.o build/philae.o -o $(TESTER)
-
-lint:
-	cpplint $(SOURCES) $(HEADERS)
 
 test: $(TESTER)
 	./$(TESTER)
