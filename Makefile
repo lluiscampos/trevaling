@@ -1,20 +1,53 @@
 
-all:: clean lint_comet67p lint_rosetta test_comet67p test_rosetta error_check
+##
+# Trevaling Makefile
+# Top level wrapper to call each component's build/lint/test targets
+###############################################################################
 
-travis: build lint_comet67p lint_rosetta test_comet67p test_rosetta coveralls error_check
+all:: clean build _lint _test error_check
 
-build:
+travis: build _lint _test coveralls error_check
+
+lint: clean _lint error_check
+
+test: clean _test error_check
+
+build: build_comet67p build_rosetta build_philae
+
+_lint: lint_comet67p lint_rosetta
+
+_test: test_comet67p test_rosetta test_philae
+
+
+##
+# Meta targets
+#########################
+
+comet67p: build_comet67p lint_comet67p test_comet67p error_check
+
+rosetta: build_rosetta lint_rosetta test_rosetta error_check
+
+philae: build_philae test_philae error_check
+
+
+##
+# Build commands
+#########################
+
+build_comet67p:
 	cd comet67p && npm install
+
+build_rosetta:
 	cd rosetta && npm install
 	cd rosetta && grunt build
 
-lint: clean lint_comet67p lint_rosetta error_check
+build_philae:
+	cd philae && make
 
-test: clean test_comet67p test_rosetta error_check
 
-comet67p: clean lint_comet67p test_comet67p
-
-rosetta: clean lint_comet67p test_comet67p
+##
+# Lint commands
+#########################
 
 lint_comet67p:
 	cd comet67p && grunt lint || touch ../error
@@ -22,11 +55,24 @@ lint_comet67p:
 lint_rosetta:
 	cd rosetta && grunt lint || touch ../error
 
+
+##
+# Test commands
+#########################
+
 test_comet67p:
 	cd comet67p && npm run test-cov || touch ../error
 
 test_rosetta:
 	cd rosetta && grunt test || touch ../error
+
+test_philae:
+	cd philae && make test || touch ../error
+
+
+##
+# Other targets
+#########################
 
 error_check:
 	test ! -e error
@@ -37,5 +83,4 @@ coveralls: test
 
 clean:
 	rm error 2> /dev/null || true
-
-.PHONY: all travis lint test comet67p rosetta error_check coveralls clean
+	cd philae && make clean
