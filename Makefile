@@ -21,11 +21,11 @@ _test: test_comet67p test_rosetta test_philae
 # Meta targets
 #########################
 
-comet67p: build_comet67p lint_comet67p test_comet67p error_check
+comet67p: error_clear build_comet67p lint_comet67p test_comet67p error_check
 
-rosetta: build_rosetta lint_rosetta test_rosetta error_check
+rosetta: error_clear build_rosetta lint_rosetta test_rosetta error_check
 
-philae: build_philae lint_philae test_philae error_check
+philae: error_clear build_philae lint_philae test_philae error_check
 
 
 ##
@@ -88,5 +88,6 @@ coveralls: coverage.info
 
 clean:
 	rm coverage.info 2> /dev/null || true
-	rm -rf comet67p/coverage 2> /dev/null || true
+	cd comet67p && grunt clean
+	cd rosetta && grunt clean
 	cd philae && make clean

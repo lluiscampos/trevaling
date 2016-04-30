@@ -15,6 +15,7 @@
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
     "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
     "gruntify-eslint": "^2.0.0",
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",

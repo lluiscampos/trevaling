@@ -7,11 +7,16 @@ module.exports = function(grunt) {
       src: ["src/*.js"]
     },
 
+    clean: {
+      tests: ['coverage']
+    }
+
   });
 
   grunt.loadNpmTasks("gruntify-eslint");
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('lint', ['eslint']);
-  grunt.registerTask('default', ['lint']);
+  grunt.registerTask('default', ['clean:all', 'lint']);
 
 };

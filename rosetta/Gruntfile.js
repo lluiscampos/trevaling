@@ -69,11 +69,17 @@ module.exports = function(grunt) {
           'js/libs/backbone.js'   : 'backbone/backbone.js'
         }
       }
+    },
+
+    clean: {
+      build: ['www/js', 'www/css'],
+      tests: ['coverage', 'test/instrumented-*.js']
     }
 
   });
 
   grunt.loadNpmTasks("gruntify-eslint");
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-json-server');
@@ -83,6 +89,6 @@ module.exports = function(grunt) {
   grunt.registerTask('lint', ['eslint']);
   grunt.registerTask('build', ['copy:app', 'bowercopy']);
   grunt.registerTask('test', ['browserify:coverage', 'mocha']);
-  grunt.registerTask('default', ['lint', 'build', 'test']);
+  grunt.registerTask('default', ['clean:all', 'lint', 'build', 'test']);
 
 };
