@@ -1,5 +1,10 @@
 language: node_js
 node_js:
   - "4.2"
-before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
+
+before_install:
+  - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
+  - sudo apt-get -qq update
+  - sudo apt-get install -y lcov
+
 script: make travis
