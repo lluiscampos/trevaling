@@ -1,11 +1,11 @@
 {
   "name": "comet67p",
   "version": "0.0.1",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
     "test-cov": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec",
-    "start": "node server.js"
+    "start": "node src/server.js"
   },
   "dependencies": {
     "express": "^4.13.4",

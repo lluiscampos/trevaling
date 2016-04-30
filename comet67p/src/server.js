@@ -3,7 +3,7 @@ var express = require('express');
 var fs = require('fs');
 var TAFFY = require('taffy');
 // load json file with db
-var myData = require('./db.json');
+var myData = require('../db.json');
 
 var jsondb = JSON.stringify(myData);
 var db = TAFFY(''+jsondb);

@@ -45,24 +45,23 @@ apt-get install nodejs-legacy
 Install dependencies:
 ```
 npm install
-bower install
 ```
 
 Build the app:
 ```
-grunt bowercopy
+grunt build
 ```
 
 Run lint:
 ```
-grunt eslint
+grunt lint
 ```
 
 To run the tests open the file test/index.html from a browser.
 
 Alternatively, grunt can be used:
 ```
-grunt mocha_phantomjs
+grunt test
 ```
 
 ## Comet67P
@@ -74,7 +73,7 @@ npm install
 
 Run lint:
 ```
-grunt eslint
+grunt lint
 ```
 
 Run tests (with coverage):

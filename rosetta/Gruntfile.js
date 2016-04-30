@@ -9,13 +9,13 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     eslint: {
-      src: ["www/js/app.js"]
+      src: ["src/*.js"]
     },
 
     browserify: {
       coverage: {
         files: {
-          'test/instrumented-app.js': 'www/js/app.js'
+          'test/instrumented-app.js': 'src/app.js'
         },
         options: {
           transform: [istanbul]
@@ -45,6 +45,14 @@ module.exports = function(grunt) {
         my_target : {}
     },
 
+    copy: {
+      app: {
+        files: [
+          {expand: true, cwd: 'src', src: ['*.js'], dest: 'www/js/', filter: 'isFile'}
+        ]
+      }
+    },
+
     bowercopy: {
       options: {
         srcPrefix: 'bower_components'
@@ -66,13 +74,14 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks("gruntify-eslint");
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-json-server');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-mocha-phantom-istanbul');
 
   grunt.registerTask('lint', ['eslint']);
-  grunt.registerTask('build', ['bowercopy']);
+  grunt.registerTask('build', ['copy:app', 'bowercopy']);
   grunt.registerTask('test', ['browserify:coverage', 'mocha']);
   grunt.registerTask('default', ['lint', 'build', 'test']);
 

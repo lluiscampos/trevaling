@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     eslint: {
-      src: ["server.js"]
+      src: ["src/*.js"]
     },
 
   });
