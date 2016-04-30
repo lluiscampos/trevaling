@@ -91,14 +91,14 @@ npm start
 
 Install dependencies (ubuntu):
 ```
-apt-get install libboost-test-dev lcov
+apt-get install libboost-test-dev lcov vera++
 npm -g install particle-cli
 ```
 
 Compile with gcc:
 ```
 make
-make tests
+make test
 ```
 
 Compile for particle:

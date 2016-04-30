@@ -31,6 +31,9 @@ $(TESTER): $(OBJECTS)
 	$(CC) $(CFLAGS) -c -I$(SRCDIR) -o $(BUILDDIR)/test_philae.o test/test_philae.cpp
 	$(CC) $(CFLAGS) -I$(SRCDIR) build/test_philae.o build/philae.o -o $(TESTER)
 
+lint:
+	vera++ $(SRCDIR)/*
+
 test: $(TESTER)
 	./$(TESTER)
 	lcov --capture --directory $(BUILDDIR) --base-directory . --output-file coverage.info

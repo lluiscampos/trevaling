@@ -12,7 +12,7 @@ test: error_clear _test error_check
 
 build: build_comet67p build_rosetta build_philae
 
-_lint: lint_comet67p lint_rosetta
+_lint: lint_comet67p lint_rosetta lint_philae
 
 _test: test_comet67p test_rosetta test_philae
 
@@ -25,7 +25,7 @@ comet67p: build_comet67p lint_comet67p test_comet67p error_check
 
 rosetta: build_rosetta lint_rosetta test_rosetta error_check
 
-philae: build_philae test_philae error_check
+philae: build_philae lint_philae test_philae error_check
 
 
 ##
@@ -53,6 +53,8 @@ lint_comet67p:
 lint_rosetta:
 	cd rosetta && grunt lint || touch ../error
 
+lint_philae:
+	cd philae && make lint || touch ../error
 
 ##
 # Test commands
