@@ -24,7 +24,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 clean:
 	@echo " Cleaning...";
-	$(RM) -r $(BUILDDIR) $(TARGET) coverage
+	$(RM) -r $(BUILDDIR) $(TARGET) coverage coverage.info
 
 $(TESTER): $(OBJECTS)
 	@mkdir -p $(BINDIR)
@@ -33,7 +33,7 @@ $(TESTER): $(OBJECTS)
 
 test: $(TESTER)
 	./$(TESTER)
-	lcov --capture --directory $(BUILDDIR) --output-file coverage.info
+	lcov --capture --directory $(BUILDDIR) --base-directory . --output-file coverage.info
 	lcov --remove coverage.info "/usr/include/*" -o coverage.info
 
 coverage: test

@@ -77,10 +77,13 @@ test_philae:
 error_check:
 	test ! -e error
 
-coveralls: test
-	lcov -a comet67p/coverage/lcov.info -a philae/coverage.info -q -o coverage.info && \
+coverage.info: _test
+	lcov -a comet67p/coverage/lcov.info -a philae/coverage.info -q -o coverage.info
+
+coveralls: _test coverage.info
 	cat ./coverage.info | ./comet67p/node_modules/coveralls/bin/coveralls.js
 
 clean:
-	rm error 2> /dev/null || true
+	rm error coverage.info 2> /dev/null || true
+	rm -rf comet67p/coverage 2> /dev/null || true
 	cd philae && make clean
