@@ -4,13 +4,11 @@
 # Top level wrapper to call each component's build/lint/test targets
 ###############################################################################
 
-all:: clean build _lint _test error_check
+all:: error_clear build _lint _test error_check
 
-travis: build _lint _test coveralls error_check
+lint: error_clear _lint error_check
 
-lint: clean _lint error_check
-
-test: clean _test error_check
+test: error_clear _test error_check
 
 build: build_comet67p build_rosetta build_philae
 
@@ -77,6 +75,9 @@ test_philae:
 error_check:
 	test ! -e error
 
+error_clear:
+	rm error 2> /dev/null || true
+
 coverage.info: _test
 	lcov -a comet67p/coverage/lcov.info -a philae/coverage.info -q -o coverage.info
 
@@ -84,6 +85,6 @@ coveralls: _test coverage.info
 	cat ./coverage.info | ./comet67p/node_modules/coveralls/bin/coveralls.js
 
 clean:
-	rm error coverage.info 2> /dev/null || true
+	rm coverage.info 2> /dev/null || true
 	rm -rf comet67p/coverage 2> /dev/null || true
 	cd philae && make clean
