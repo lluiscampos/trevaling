@@ -1,11 +1,11 @@
-language: node_js
-node_js:
-  - "4.2"
+language: generic
+sudo: required
+dist: trusty
 
 before_install:
   - npm i -g npm@3
   - sudo apt-get -qq update
-  - sudo apt-get install -y libboost-test-dev lcov 'vera++'
+  - sudo apt-get install -y libboost-test-dev lcov vera++
 
 script:
   - make build
