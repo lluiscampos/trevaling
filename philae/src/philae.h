@@ -8,8 +8,11 @@ class Philae
 
 public:
 
-  Philae();
-  ~Philae();
+  Philae(void);
+  ~Philae(void);
+
+  void setup(void);
+  void loop(void);
 
   int get_position();
 

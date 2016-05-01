@@ -18,6 +18,8 @@ TESTOBJ := $(patsubst $(TSTDIR)/%,$(BUILDDIR)/%,$(TESTS:.$(SRCEXT)=.o))
 CC := g++
 CFLAGS := -g -Wall --coverage
 
+VERSION := $(shell git describe --always --dirty)
+
 $(TARGET): $(OBJECTS)
 	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
@@ -50,7 +52,6 @@ coverage: test
 	genhtml coverage.info --output-directory coverage
 
 particle:
-	particle compile electron src/main.ino src/philae.h src/philae.cpp --saveTo firmware.bin
-	sudo particle flash --serial firmware.bin
+	particle compile electron src/main.ino src/philae.h src/philae.cpp --saveTo $(BINDIR)/firmware_$(VERSION).bin
 
 .PHONY: clean test coverage particle
