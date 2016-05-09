@@ -10,7 +10,8 @@ TARGET := $(BINDIR)/philae
 TESTER := $(BINDIR)/tester
 
 SRCEXT  := cpp
-SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT) -not -name main.*)
+HEADERS := $(shell find $(SRCDIR) -type f -name *.h)
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TESTS   := $(shell find $(TSTDIR) -type f -name *.$(SRCEXT))
 TESTOBJ := $(patsubst $(TSTDIR)/%,$(BUILDDIR)/%,$(TESTS:.$(SRCEXT)=.o))
@@ -22,7 +23,8 @@ VERSION := $(shell git describe --always --dirty)
 
 $(TARGET): $(OBJECTS)
 	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
+	$(CC) $(CFLAGS) -c -o $(BUILDDIR)/main.o $(SRCDIR)/main.cpp
+	$(CC) $(CFLAGS) $(OBJECTS) $(BUILDDIR)/main.o -o $(TARGET)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
@@ -32,9 +34,9 @@ $(BUILDDIR)/%.o: $(TSTDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
 	$(CC) $(CFLAGS) -c -I$(SRCDIR) -o $@ $<
 
-$(TESTER): $(TESTOBJ) $(BUILDDIR)/philae.o
+$(TESTER): $(TESTOBJ) $(OBJECTS)
 	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $(TESTOBJ) $(BUILDDIR)/philae.o -o $(TESTER)
+	$(CC) $(CFLAGS) $(TESTOBJ) $(OBJECTS) -o $(TESTER)
 
 clean:
 	@echo " Cleaning...";
@@ -46,12 +48,12 @@ lint:
 test: $(TESTER)
 	./$(TESTER)
 	lcov --capture --directory $(BUILDDIR) --base-directory . --output-file coverage.info
-	lcov --remove coverage.info "/usr/include/*" "/test/*" -o coverage.info
+	lcov --remove coverage.info "/usr/include/*" "/test/*" -o coverage.info 1>/dev/null
 
 coverage: test
 	genhtml coverage.info --output-directory coverage
 
 particle:
-	particle compile electron src/main.ino src/philae.h src/philae.cpp --saveTo $(BINDIR)/firmware_$(VERSION).bin
+	particle compile electron src/main.ino $(SOURCES) $(HEADERS) --saveTo $(BINDIR)/firmware_$(VERSION).bin
 
 .PHONY: clean test coverage particle
