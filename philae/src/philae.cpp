@@ -5,17 +5,9 @@
 #else
   #include <stdio.h>
 #endif
-#include "philae.h"
+#include "osal.h"
 
-#if defined(PARTICLE)
-  #define philae_printf(...) Serial.printf(__VA_ARGS__)
-  #define philae_available Serial.available() > 0
-  #define philae_getchar Serial.read
-#else
-  #define philae_printf(...) printf(__VA_ARGS__)
-  #define philae_available true
-  #define philae_getchar getchar
-#endif
+#include "philae.h"
 
 Philae::Philae(void)
 {
