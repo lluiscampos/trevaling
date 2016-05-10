@@ -12,7 +12,8 @@
 
 Philae::Philae(void)
 {
-  last_position = 10;
+  this->current_position.local_area_code = 0;
+  this->current_position.cell_id = 0;
 }
 
 Philae::~Philae(void)
@@ -44,6 +45,7 @@ void Philae::process_dev_command(philae_dev_command_t command_id)
     retval = cmd_network_registration_status_get(&network_registration_status);
     if (retval)
     {
+      this->set_position(network_registration_status.lac, network_registration_status.ci);
       philae_printf("n: %d, stat %d, lac %u, ci %lu, actstatus %d\r\n",
         network_registration_status.n,
         network_registration_status.stat,
@@ -78,11 +80,24 @@ void Philae::loop(void)
 
     this->process_dev_command((philae_dev_command_t)incomingByte);
 
-    philae_printf("Philae position: %d \r\n", this->get_position());
+    philae_printf("Philae position: %s \r\n", this->get_position());
   }
 }
 
-int Philae::get_position()
+const char * Philae::get_position()
 {
-  return last_position;
+  static char str[64];
+
+  sprintf(str, "{\"lac\":%u,\"ci\":%lu}",
+    this->current_position.local_area_code,
+    this->current_position.cell_id
+  );
+
+  return str;
+}
+
+void Philae::set_position(unsigned int local_area_code, long unsigned int cell_id)
+{
+  this->current_position.local_area_code = local_area_code;
+  this->current_position.cell_id = cell_id;
 }
