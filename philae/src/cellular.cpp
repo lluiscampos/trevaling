@@ -25,7 +25,8 @@ void debug_print_callback(int type, const char* buf, int len)
 
 #define ATCOMMAND_SCAN(cmd) "\r\n" cmd ": %[^\r]\r\n"
 
-bool cmd_network_registration_status_parse(const char* buf, cmd_network_registration_status_t* p_network_registration_status)
+bool cmd_network_registration_status_parse(const char* buf,
+            cmd_network_registration_status_t* p_network_registration_status)
 {
   char parse_buffer[64];
   char* p_token;
@@ -85,7 +86,8 @@ int callbackCREG_set(int type, const char* buf, int len, char* creg)
   return WAIT;
 }
 
-int callbackCREG_get(int type, const char* buf, int len, cmd_network_registration_status_t* p_network_registration_status)
+int callbackCREG_get(int type, const char* buf, int len,
+            cmd_network_registration_status_t* p_network_registration_status)
 {
   int retval;
 
@@ -98,7 +100,8 @@ int callbackCREG_get(int type, const char* buf, int len, cmd_network_registratio
   return WAIT;
 }
 
-bool cmd_network_registration_status_get(cmd_network_registration_status_t* p_network_registration_status)
+bool cmd_network_registration_status_get(
+            cmd_network_registration_status_t* p_network_registration_status)
 {
   int retval;
   char creg_set[32] = "";
@@ -116,7 +119,8 @@ bool cmd_network_registration_status_get(cmd_network_registration_status_t* p_ne
 
 #else
 
-bool cmd_network_registration_status_get(cmd_network_registration_status_t* p_network_registration_status)
+bool cmd_network_registration_status_get(
+            cmd_network_registration_status_t* p_network_registration_status)
 {
   philae_printf("CREG DUMMY\r\n");
 
