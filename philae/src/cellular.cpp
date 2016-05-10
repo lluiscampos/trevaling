@@ -39,6 +39,8 @@ bool cmd_network_registration_status_parse(const char* buf,
     return false;
   }
 
+  //TODO: Check for p_token being a sane pointer or return
+
   p_token = strtok((char*)parse_buffer, ",");
   p_network_registration_status->n = strtol(p_token, NULL, 10);
 
@@ -75,6 +77,8 @@ bool cmd_network_registration_status_parse(const char* buf,
 
 #if defined(PARTICLE)
 
+//TODO: Investigate number and type of callbacks
+
 int callbackCREG_set(int type, const char* buf, int len, char* creg)
 {
   debug_print_callback(type, buf, len);
@@ -107,6 +111,8 @@ bool cmd_network_registration_status_get(
   char creg_set[32] = "";
 
   memset(p_network_registration_status, 0, sizeof(cmd_network_registration_status_t));
+
+  //TODO: Investigate ahd check the Cellular.command retval
 
   retval = Cellular.command(callbackCREG_set, creg_set, 10000, "AT+CREG=2\r\n");
   philae_printf("Cellular.command retval: %d\r\n", retval);
