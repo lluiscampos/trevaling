@@ -5,7 +5,10 @@
 
 enum philae_dev_command_t
 {
-  PHILAE_DEV_NETWORK_REGISTRATION_STATUS = (int)'1'
+  PHILAE_DEV_NETWORK_REGISTRATION_STATUS = (int) '1',
+
+  PHILAE_DEV_PRINT_CURRENT_POSITION      = (int) '5',
+  PHILAE_DEV_PUBLISH_CURRENT_POSITION    = (int) '6'
 };
 
 struct philae_position_t

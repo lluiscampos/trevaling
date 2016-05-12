@@ -27,6 +27,10 @@ const char* dev_command_to_str(philae_dev_command_t command_id)
   {
     case PHILAE_DEV_NETWORK_REGISTRATION_STATUS:
       return "PHILAE_DEV_NETWORK_REGISTRATION_STATUS";
+    case PHILAE_DEV_PRINT_CURRENT_POSITION:
+      return "PHILAE_DEV_PRINT_CURRENT_POSITION";
+    case PHILAE_DEV_PUBLISH_CURRENT_POSITION:
+      return "PHILAE_DEV_PUBLISH_CURRENT_POSITION";
     default:
       return "(unknown)";
   }
@@ -46,18 +50,30 @@ void Philae::process_dev_command(philae_dev_command_t command_id)
     if (retval)
     {
       this->set_position(network_registration_status.lac, network_registration_status.ci);
-      philae_printf("n: %d, stat %d, lac %u, ci %lu, actstatus %d\r\n",
-        network_registration_status.n,
-        network_registration_status.stat,
-        network_registration_status.lac,
-        network_registration_status.ci,
-        network_registration_status.actstatus
-      );
     }
     else
     {
       philae_printf("failed\r\n"); /* sic */
     }
+  }
+  else if (command_id == PHILAE_DEV_PRINT_CURRENT_POSITION)
+  {
+    philae_printf("Philae position: %s \r\n", this->get_position());
+  }
+  else if (command_id == PHILAE_DEV_PUBLISH_CURRENT_POSITION)
+  {
+#if defined(PARTICLE)
+    philae_printf("Publishing current position\r\n");
+    retval = Particle.publish("current-position", this->get_position(), 60, PRIVATE);
+    if (not retval)
+    {
+      philae_printf("failed\r\n"); /* sic */
+    }
+#endif
+  }
+  else
+  {
+    philae_printf("nothing to do\r\n");
   }
 
   philae_printf("...done\r\n");
@@ -79,8 +95,6 @@ void Philae::loop(void)
     incomingByte = philae_getchar();
 
     this->process_dev_command((philae_dev_command_t)incomingByte);
-
-    philae_printf("Philae position: %s \r\n", this->get_position());
   }
 }
 
