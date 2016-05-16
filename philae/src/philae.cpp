@@ -103,6 +103,20 @@ void Philae::loop(void)
 
     this->process_dev_command((philae_dev_command_t)incomingByte);
   }
+
+#if defined(PARTICLE)
+  this->retreive_and_update_position();
+  if (this->position_changed())
+  {
+    bool retval;
+    retval = Particle.publish("current-position", this->get_position(), 60, PRIVATE);
+    if (not retval)
+    {
+      //TODO: Get some failure statistics
+    }
+  }
+  System.sleep(60);
+#endif
 }
 
 const char * Philae::get_position()
