@@ -30,11 +30,13 @@ public:
 
   const char* get_position();
   void set_position(unsigned int local_area_code, long unsigned int cell_id);
+  bool position_changed();
 
 private:
 
   void process_dev_command(philae_dev_command_t command_id);
   philae_position_t current_position;
+  philae_position_t last_position;
 
 };
 

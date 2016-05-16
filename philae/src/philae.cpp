@@ -14,6 +14,8 @@ Philae::Philae(void)
 {
   this->current_position.local_area_code = 0;
   this->current_position.cell_id = 0;
+  this->last_position.local_area_code = 0;
+  this->last_position.cell_id = 0;
 }
 
 Philae::~Philae(void)
@@ -112,6 +114,14 @@ const char * Philae::get_position()
 
 void Philae::set_position(unsigned int local_area_code, long unsigned int cell_id)
 {
+  this->last_position.local_area_code = this->current_position.local_area_code;
+  this->last_position.cell_id = this->current_position.cell_id;
   this->current_position.local_area_code = local_area_code;
   this->current_position.cell_id = cell_id;
+}
+
+bool Philae::position_changed()
+{
+  return not (    (this->current_position.local_area_code == this->last_position.local_area_code)
+              and (this->current_position.cell_id == this->last_position.cell_id));
 }
