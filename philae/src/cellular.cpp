@@ -33,7 +33,7 @@ bool cmd_network_registration_status_parse(const char* buf,
   int retval;
 
   retval = sscanf(buf, ATCOMMAND_SCAN("+CREG"), parse_buffer);
-  philae_printf("<parse_buffer>%s</parse_buffer>\r\n", parse_buffer);
+  //philae_printf("<parse_buffer>%s</parse_buffer>\r\n", parse_buffer);
   if (retval != 1)
   {
     return false;
@@ -81,7 +81,7 @@ bool cmd_network_registration_status_parse(const char* buf,
 
 int callbackCREG_set(int type, const char* buf, int len, char* creg)
 {
-  debug_print_callback(type, buf, len);
+  //debug_print_callback(type, buf, len);
 
   if (type == TYPE_PLUS)
   {
@@ -95,7 +95,7 @@ int callbackCREG_get(int type, const char* buf, int len,
 {
   int retval;
 
-  debug_print_callback(type, buf, len);
+  //debug_print_callback(type, buf, len);
 
   if (type == TYPE_PLUS)
   {
@@ -115,10 +115,10 @@ bool cmd_network_registration_status_get(
   //TODO: Investigate ahd check the Cellular.command retval
 
   retval = Cellular.command(callbackCREG_set, creg_set, 10000, "AT+CREG=2\r\n");
-  philae_printf("Cellular.command retval: %d\r\n", retval);
+  //philae_printf("Cellular.command retval: %d\r\n", retval);
 
   retval = Cellular.command(callbackCREG_get, p_network_registration_status, 10000, "AT+CREG?\r\n");
-  philae_printf("Cellular.command retval: %d\r\n", retval);
+  //philae_printf("Cellular.command retval: %d\r\n", retval);
 
   return retval == RESP_OK;
 }

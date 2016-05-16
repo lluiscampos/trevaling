@@ -95,6 +95,8 @@ void Philae::setup(void)
 
 void Philae::loop(void)
 {
+//TODO: Find a way to get the develop console conditionally compiled
+#if 0
   int incomingByte = 0;
 
   if (philae_available)
@@ -103,6 +105,7 @@ void Philae::loop(void)
 
     this->process_dev_command((philae_dev_command_t)incomingByte);
   }
+#endif
 
 #if defined(PARTICLE)
   this->retreive_and_update_position();
@@ -115,7 +118,7 @@ void Philae::loop(void)
       //TODO: Get some failure statistics
     }
   }
-  System.sleep(60);
+  delay(10000);
 #endif
 }
 
