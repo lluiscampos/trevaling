@@ -88,10 +88,11 @@ npm start
 
 ## Philae
 
+### Standalone mode on PC
+
 Install dependencies (ubuntu):
 ```
 apt-get install libboost-test-dev lcov vera++
-npm -g install particle-cli
 ```
 
 Compile with gcc:
@@ -100,14 +101,23 @@ make
 make test
 ```
 
-Compile for particle:
+### Firmware for particle.io
+
+Install dependencies (ubuntu):
 ```
-particle compile electron app.ino philae.cpp philae.h --saveTo firmware.bin
+npm -g install particle-cli
+apt-get install dfu-util openssl
+```
+
+Log in into your particle account and compile the firmware:
+```
+particle cloud login
+make particle
 ```
 
 Flash the device via serial:
 ```
-sudo particle flash --serial firmware.bin
+sudo particle flash --serial bin/firmware_[version].bin
 ```
 
 ## References to documentation

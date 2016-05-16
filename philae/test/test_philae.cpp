@@ -1,40 +1,29 @@
-#define BOOST_TEST_MODULE TestPhylae
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+
 #include "philae.h"
- 
+
 BOOST_AUTO_TEST_SUITE (phylae_test)
 
 BOOST_AUTO_TEST_CASE(tc_01_get_position)
 {
-    Philae p;
-    BOOST_CHECK(p.get_position() == 10);
+  char position_str[64];
+  Philae p;
+
+  strcpy(position_str, p.get_position());
+  BOOST_CHECK(strcmp(position_str, "{\"lac\":0,\"ci\":0}") == 0);
+}
+
+BOOST_AUTO_TEST_CASE(test_Philae_position_changed)
+{
+  Philae p;
+
+  BOOST_CHECK(p.position_changed() == false);
+
+  p.set_position(1234, 5678);
+  BOOST_CHECK(p.position_changed() == true);
+
+  p.set_position(1234, 5678);
+  BOOST_CHECK(p.position_changed() == false);
 }
 
 BOOST_AUTO_TEST_SUITE_END( )
-
-
-/*
-int add( int i, int j ) { return i+j; }
-
-BOOST_AUTO_TEST_CASE( my_test )
-{
-    // seven ways to detect and report the same error:
-    BOOST_CHECK( add( 2,2 ) == 4 );        // #1 continues on error
-
-    BOOST_REQUIRE( add( 2,2 ) == 4 );      // #2 throws on error
-
-    if( add( 2,2 ) != 4 )
-      BOOST_ERROR( "Ouch..." );            // #3 continues on error
-
-    if( add( 2,2 ) != 4 )
-      BOOST_FAIL( "Ouch..." );             // #4 throws on error
-
-    if( add( 2,2 ) != 4 ) throw "Ouch..."; // #5 throws on error
-
-    BOOST_CHECK_MESSAGE( add( 2,2 ) == 4,  // #6 continues on error
-                         "add(..) result: " << add( 2,2 ) );
-
-    BOOST_CHECK_EQUAL( add( 2,2 ), 4 );	  // #7 continues on error
-}
-*/
-
