@@ -30,6 +30,7 @@ public:
 
   const char* get_position();
   void set_position(unsigned int local_area_code, long unsigned int cell_id);
+  void retreive_and_update_position();
   bool position_changed();
 
 private:

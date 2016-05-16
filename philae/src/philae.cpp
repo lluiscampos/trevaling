@@ -40,23 +40,11 @@ const char* dev_command_to_str(philae_dev_command_t command_id)
 
 void Philae::process_dev_command(philae_dev_command_t command_id)
 {
-  bool retval;
-
   philae_printf("Processing %s...\r\n", dev_command_to_str(command_id));
 
   if (command_id == PHILAE_DEV_NETWORK_REGISTRATION_STATUS)
   {
-    cmd_network_registration_status_t network_registration_status;
-
-    retval = cmd_network_registration_status_get(&network_registration_status);
-    if (retval)
-    {
-      this->set_position(network_registration_status.lac, network_registration_status.ci);
-    }
-    else
-    {
-      philae_printf("failed\r\n"); /* sic */
-    }
+    this->retreive_and_update_position();
   }
   else if (command_id == PHILAE_DEV_PRINT_CURRENT_POSITION)
   {
@@ -65,6 +53,7 @@ void Philae::process_dev_command(philae_dev_command_t command_id)
   else if (command_id == PHILAE_DEV_PUBLISH_CURRENT_POSITION)
   {
 #if defined(PARTICLE)
+    bool retval;
     philae_printf("Publishing current position\r\n");
     retval = Particle.publish("current-position", this->get_position(), 60, PRIVATE);
     if (not retval)
@@ -79,6 +68,22 @@ void Philae::process_dev_command(philae_dev_command_t command_id)
   }
 
   philae_printf("...done\r\n");
+}
+
+void Philae::retreive_and_update_position()
+{
+  bool retval;
+  cmd_network_registration_status_t network_registration_status;
+
+  retval = cmd_network_registration_status_get(&network_registration_status);
+  if (retval)
+  {
+    this->set_position(network_registration_status.lac, network_registration_status.ci);
+  }
+  else
+  {
+    philae_printf("retreive_and_update_position failed\r\n");
+  }
 }
 
 void Philae::setup(void)
