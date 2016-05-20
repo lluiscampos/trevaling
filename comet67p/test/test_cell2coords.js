@@ -12,7 +12,8 @@ describe("Cell2Coords module", function() {
       this.timeout(2000);
 
       //TODO: Find a way to mock OpenSignal API!
-      cell2coords({cid: 13564400, lac: 20601}, function(ret) {
+      cell2coords({cid: 13564400, lac: 20601}, function(error, ret) {
+        should.not.exist(error);
         ret.lat.should.equal('59.90981531125');
         ret.lng.should.equal('10.77598607375');
 

@@ -9,13 +9,16 @@ convert = function(params, callback) {
 
   var url = 'http://api.opensignal.com/v2/towerinfo.json?cid=' + params.cid + '&lac=' + params.lac +'&apikey=' + apikey;
   request(url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      obj = JSON.parse(body);
-      //TODO: Do not asume tower1
-      callback({lat: obj.tower1.est_lat, lng: obj.tower1.est_lng})
+    if (error) {
+      callback(new Error('request returned error ' + error))
+    }
+    else if (response.statusCode != 200) {
+      callback(new Error('API call returned status code ' + response.statusCode))
     }
     else {
-      callback({lat: null, lng: null})
+      obj = JSON.parse(body);
+      //TODO: Do not asume tower1
+      callback(null, {lat: obj.tower1.est_lat, lng: obj.tower1.est_lng})
     }
   })
 };
