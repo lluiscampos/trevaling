@@ -35,4 +35,26 @@ describe("Cell2Coords module", function() {
 
   });
 
+  describe("Handle HTTP errors", function() {
+
+    before(function(){
+      nock('http://api.opensignal.com')
+      .get(/./g)
+      .reply(404, 'This page could not be found');
+    });
+
+    it("propagates error from HTTP 404", function(done) {
+
+      cell2coords({cid: 1234, lac: 5678}, function(error, coords) {
+        should.exist(error);
+        error.should.be.an('Error');
+        error.message.should.equal('API call returned status code 404');
+
+        done();
+      });
+
+    });
+
+  });
+
 });
