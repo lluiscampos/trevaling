@@ -81,6 +81,11 @@ Run tests (with coverage):
 npm test-cov
 ```
 
+Set the following environment variables in an .env file:
+```
+OPEN_SIGNAL_API_KEY=<your_api_key_here>
+```
+
 Start server:
 ```
 npm start
@@ -126,9 +131,10 @@ sudo particle flash --serial bin/firmware_[version].bin
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 - https://nodejs.org/dist/latest-v4.x/docs/api/
 
-### comet67p libraries
+### comet67p libraries and APIs
 - http://expressjs.com/en/4x/api.html
 - https://github.com/typicaljoe/taffydb
+- http://developer.opensignal.com/towerinfo/
 
 ### rosetta libraries
 - http://underscorejs.org/
