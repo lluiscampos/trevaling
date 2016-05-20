@@ -2,7 +2,7 @@
 var request = require('request');
 require('dotenv').config();
 
-convert = function(params, callback) {
+var convert = function(params, callback) {
 
   //TODO: Throw an error if the key is not present
   var apikey = process.env.OPEN_SIGNAL_API_KEY;
@@ -16,7 +16,7 @@ convert = function(params, callback) {
       callback(new Error('API call returned status code ' + response.statusCode))
     }
     else {
-      obj = JSON.parse(body);
+      var obj = JSON.parse(body);
       //TODO: Do not asume tower1
       callback(null, {lat: obj.tower1.est_lat, lng: obj.tower1.est_lng})
     }
