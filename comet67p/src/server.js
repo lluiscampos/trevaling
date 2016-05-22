@@ -10,8 +10,7 @@ app.get('/viewer', function(request, response) {
       response.status(500).send(err);
     }
     else {
-      response.setHeader('Content-Type', 'application/json')
-      response.send(JSON.stringify(data, null, 4));
+      response.json(data);
     }
   });
 });
