@@ -33,10 +33,10 @@ describe("Comet67P API", function() {
         var data = JSON.parse(body);
         data.should.be.an('array');
         data[0].should.exist;
-        data[0].should.contain.all.keys('id', 'title', 'locations');
-        data[0].locations.should.be.an('array');
-        data[0].locations[0].should.exist;
-        data[0].locations[0].should.have.all.keys('time', 'latitud');
+        data[0].should.contain.all.keys('id', 'trace');
+        data[0].trace.should.be.an('array');
+        //TODO: Create some dummy entries
+        //data[0].trace[0].should.have.all.keys('time', 'lat', 'lng');
 
         done();
       });

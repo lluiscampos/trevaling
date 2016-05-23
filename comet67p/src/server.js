@@ -1,8 +1,13 @@
 
-var express = require('express');
-var dataman = require('./dataman');
+var app     = require('express')();
 
-var app = express();
+var dataman = require('./dataman');
+dataman.init(function(err) {
+  if (err)
+  {
+    throw new Error('Failed to initialize database: ' + err);
+  }
+});
 
 app.get('/viewer', function(request, response) {
   dataman.viewer({}, function(err, data) {

@@ -1,40 +1,68 @@
 
-var fs = require('fs');
-var TAFFY = require('taffy');
-// load json file with db
-var myData = require('../db.json');
+var fs    = require('fs');
+var taffy = require('taffy');
 
-var jsondb = JSON.stringify(myData);
-var db = TAFFY(''+jsondb);
+var db_filename = 'db.json';
+var DATABASE = null
 
+var _database_save = function(callback)
+{
+  fs.writeFile(db_filename, JSON.stringify(DATABASE().get()), 'utf-8', function(err) {
+    if (err) {
+      callback(err);
+    }
+    else {
+      callback(null);
+    }
+  })
+}
 
 var philae = function(params, callback) {
 
-  db.insert(
-    params,
-    function(err) {
-      if(err){
-        callback(new Error("Database returned error " + err));
-      }
+  if (DATABASE === null) {
+    callback(new Error ("Database not initialized"));
+    return;
+  }
+
+  DATABASE().first().trace.push({
+    'time': params.time,
+    'lat' : params.lat,
+    'lng' : params.lng
+  });
+
+  _database_save(function(err){
+    if (err) {
+      callback(err);
     }
-  );
-
-  try {
-    fs.writeFileSync("../db.json", JSON.stringify(db().get(), null, 4));
-  }
-  catch (err) {
-    callback(new Error("Filesystem returned error " + err));
-  }
-
-  callback(null);
-
+    else {
+      callback(null);
+    }
+  })
 }
 
 var viewer = function(params, callback) {
-  callback(null, db().get());
+  if (DATABASE === null) {
+    callback(new Error ("Database not initialized"));
+    return;
+  }
+
+  callback(null, DATABASE().get());
+}
+
+var database_init = function(callback) {
+  DATABASE = taffy({"id": "first-trip", "trace": []});
+  _database_save(function(err){
+    if (err) {
+      callback(err);
+    }
+    else {
+      callback(null);
+    }
+  })
 }
 
 module.exports = {
+  init  : database_init,
   philae: philae,
   viewer: viewer
 };
