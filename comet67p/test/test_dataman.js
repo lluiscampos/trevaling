@@ -196,5 +196,39 @@ describe("Dataman module", function() {
 
     });
 
+    describe("Throws sanity errors on insert", function() {
+
+      it("missing time", function(done) {
+        dataman.philae({
+            'lat' : '12.3456789',
+            'lng' : '98.7654321'}, function(err, data) {
+          should.exist(err);
+          err.should.be.an('Error');
+          done();
+        });
+      });
+
+      it("missing lat", function(done) {
+        dataman.philae({
+            'time': '2016-05-16T12:34:23.887Z',
+            'lng' : '98.7654321'}, function(err, data) {
+          should.exist(err);
+          err.should.be.an('Error');
+          done();
+        });
+      });
+
+      it("missing lng", function(done) {
+        dataman.philae({
+            'time': '2016-05-16T12:34:23.887Z',
+            'lat' : '12.3456789'}, function(err, data) {
+          should.exist(err);
+          err.should.be.an('Error');
+          done();
+        });
+      });
+
+    });
+
   });
 });

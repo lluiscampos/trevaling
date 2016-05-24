@@ -26,7 +26,10 @@ var philae = function(params, callback) {
     return;
   }
 
-  //TODO: Check for valid time, lat, lng
+  if ( !params.hasOwnProperty('time') || !params.hasOwnProperty('lat') || !params.hasOwnProperty('lng') ) {
+    callback(new Error ("Invalid parameters, object must have keys {time, lat, lng}"));
+    return;
+  }
 
   DATABASE().first().trace.push({
     'time': params.time,
