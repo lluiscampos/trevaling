@@ -24,6 +24,8 @@ var philae = function(params, callback) {
     return;
   }
 
+  //TODO: Check for valid time, lat, lng
+
   DATABASE().first().trace.push({
     'time': params.time,
     'lat' : params.lat,
@@ -50,12 +52,20 @@ var viewer = function(params, callback) {
 }
 
 var database_init = function(callback) {
-  DATABASE = taffy({"id": "first-trip", "trace": []});
-  _database_save(function(err){
+  fs.readFile(db_filename, 'utf-8', function(err, contents) {
     if (err) {
-      callback(err);
+      DATABASE = taffy({"id": "first-trip", "trace": []});
+      _database_save(function(err){
+        if (err) {
+          callback(err);
+        }
+        else {
+          callback(null);
+        }
+      })
     }
     else {
+      DATABASE = taffy(contents)
       callback(null);
     }
   })

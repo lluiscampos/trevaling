@@ -163,6 +163,9 @@ describe("Dataman module", function() {
         sinon
           .stub(fs, 'writeFile')
           .yields(new Error('Some fancy system error'));
+        sinon
+          .stub(fs, 'readFile')
+          .yields(new Error('Other fancy system error'));
       });
 
       it("on init", function(done) {
