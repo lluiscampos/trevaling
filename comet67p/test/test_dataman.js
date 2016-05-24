@@ -29,32 +29,28 @@ describe("Dataman module", function() {
         should.not.exist(stat);
       });
 
-      dataman.init(function(err) {
+      dataman.init();
+      fs.stat(test_db_file, function(err, stat) {
         should.not.exist(err);
-        fs.stat(test_db_file, function(err, stat) {
-          should.not.exist(err);
-          stat.isFile().should.equal(true)
-          done();
-        });
+        stat.isFile().should.equal(true)
+        done();
       });
 
     });
 
     it("create first-trip table", function(done) {
 
-      dataman.init(function(err) {
+      dataman.init();
+      fs.readFile(test_db_file, function(err, d) {
         should.not.exist(err);
-        fs.readFile(test_db_file, function(err, d) {
-          var data = JSON.parse(d);
-          data.should.be.an('array');
-          data[0].should.exist;
-          data[0].should.contain.all.keys('id', 'trace');
-          data[0].id.should.equal('first-trip');
-          data[0].trace.should.be.an('array');
-          data[0].trace.should.be.empty;
-          done();
-        });
-
+        var data = JSON.parse(d);
+        data.should.be.an('array');
+        data[0].should.exist;
+        data[0].should.contain.all.keys('id', 'trace');
+        data[0].id.should.equal('first-trip');
+        data[0].trace.should.be.an('array');
+        data[0].trace.should.be.empty;
+        done();
       });
 
     });
@@ -63,11 +59,8 @@ describe("Dataman module", function() {
 
   describe("Manipulates data", function() {
 
-    before(function(done){
-      dataman.init(function(err) {
-        should.not.exist(err);
-        done();
-      });
+    before(function(){
+      dataman.init();
     });
 
     it("returns data", function(done) {
@@ -167,18 +160,21 @@ describe("Dataman module", function() {
           .stub(fs, 'writeFile')
           .yields(new Error('Some fancy system error'));
         sinon
-          .stub(fs, 'readFile')
-          .yields(new Error('Other fancy system error'));
+          .stub(fs, 'readFileSync')
+          .throws(new Error('Other fancy system error'));
+        sinon
+          .stub(fs, 'writeFileSync')
+          .throws(new Error('Yet another fancy system error'));
       });
 
-      it("on init", function(done) {
+      after(function() {
+        fs.writeFile.restore();
+        fs.readFileSync.restore();
+        fs.writeFileSync.restore();
+      })
 
-        dataman.init(function(err, data) {
-          should.exist(err);
-          err.should.be.an('Error');
-          done();
-        });
-
+      it("on init", function() {
+        (function () { dataman.init() }).should.throw(Error);
       });
 
       it("on insert", function(done) {

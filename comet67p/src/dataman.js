@@ -56,24 +56,22 @@ var viewer = function(params, callback) {
   callback(null, DATABASE().get());
 }
 
-var database_init = function(callback) {
-  fs.readFile(db_filename, 'utf-8', function(err, contents) {
-    if (err) {
-      DATABASE = taffy({"id": "first-trip", "trace": []});
-      _database_save(function(err){
-        if (err) {
-          callback(err);
-        }
-        else {
-          callback(null);
-        }
-      })
-    }
-    else {
-      DATABASE = taffy(contents)
-      callback(null);
-    }
-  })
+var database_init = function() {
+  var contents = {}
+  var write_file = false;
+
+  try {
+    contents = fs.readFileSync(db_filename, 'utf-8');
+  }
+  catch (err) {
+    contents = {"id": "first-trip", "trace": []};
+    write_file = true;
+  }
+  DATABASE = taffy(contents);
+
+  if (write_file) {
+    fs.writeFileSync(db_filename, JSON.stringify(DATABASE().get()), 'utf-8');
+  }
 }
 
 module.exports = {
