@@ -3,7 +3,7 @@ var should  = require('chai').should();
 var sinon   = require('sinon');
 var fs      = require('fs');
 
-var test_db_file = '/tmp/test_db.json'
+var test_db_file = 'test/test_db.json'
 process.env.DATABASE_FILEPATH = test_db_file
 
 var dataman = require('../src/dataman.js');
