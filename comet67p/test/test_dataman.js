@@ -1,5 +1,6 @@
 
 var should  = require('chai').should();
+var sinon   = require('sinon');
 var fs      = require('fs');
 
 var dataman = require('../src/dataman.js');
@@ -126,30 +127,65 @@ describe("Dataman module", function() {
 
   describe("Handles errors nicely", function() {
 
+    describe("Not initialized database", function() {
 
-    beforeEach(function() {
-      delete require.cache[require.resolve('../src/dataman.js')];
-      dataman = require('../src/dataman.js');
-    });
-
-    it("not initialized db on viewer", function(done) {
-
-      dataman.viewer({}, function(err, data) {
-        should.exist(err);
-        err.should.be.an('Error');
-        err.message.should.equal('Database not initialized');
-        done();
+      beforeEach(function() {
+        delete require.cache[require.resolve('../src/dataman.js')];
+        dataman = require('../src/dataman.js');
       });
 
+      it("on viewer", function(done) {
+
+        dataman.viewer({}, function(err, data) {
+          should.exist(err);
+          err.should.be.an('Error');
+          err.message.should.equal('Database not initialized');
+          done();
+        });
+
+      });
+
+      it("on insert", function(done) {
+
+        dataman.philae({}, function(err, data) {
+          should.exist(err);
+          err.should.be.an('Error');
+          err.message.should.equal('Database not initialized');
+          done();
+        });
+
+      });
     });
 
-    it("not initialized db on insert", function(done) {
+    describe("Transport system errors", function() {
 
-      dataman.philae({}, function(err, data) {
-        should.exist(err);
-        err.should.be.an('Error');
-        err.message.should.equal('Database not initialized');
-        done();
+      before(function() {
+        sinon
+          .stub(fs, 'writeFile')
+          .yields(new Error('Some fancy system error'));
+      });
+
+      it("on init", function(done) {
+
+        dataman.init(function(err, data) {
+          should.exist(err);
+          err.should.be.an('Error');
+          done();
+        });
+
+      });
+
+      it("on insert", function(done) {
+
+        dataman.philae({
+            'time': '2016-05-16T12:34:23.887Z',
+            'lat' : '12.3456789',
+            'lng' : '98.7654321'}, function(err, data) {
+          should.exist(err);
+          err.should.be.an('Error');
+          done();
+        });
+
       });
 
     });
