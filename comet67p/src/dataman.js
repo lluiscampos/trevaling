@@ -1,8 +1,10 @@
 
+require('dotenv').config();
+
 var fs    = require('fs');
 var taffy = require('taffy');
 
-var db_filename = 'db.json';
+var db_filename = process.env.DATABASE_FILEPATH || '/tmp/db.json';
 var DATABASE = null
 
 var _database_save = function(callback)

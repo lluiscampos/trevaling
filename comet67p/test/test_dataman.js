@@ -3,6 +3,9 @@ var should  = require('chai').should();
 var sinon   = require('sinon');
 var fs      = require('fs');
 
+var test_db_file = '/tmp/test_db.json'
+process.env.DATABASE_FILEPATH = test_db_file
+
 var dataman = require('../src/dataman.js');
 
 describe("Dataman module", function() {
@@ -11,9 +14,9 @@ describe("Dataman module", function() {
 
 
     before(function(done){
-      fs.stat('db.json', function(err, stats) {
+      fs.stat(test_db_file, function(err, stats) {
         if (stats && stats.isFile()) {
-          fs.unlinkSync('db.json');
+          fs.unlinkSync(test_db_file);
         }
         done();
       })
@@ -21,14 +24,14 @@ describe("Dataman module", function() {
 
     it("creates db.json file", function(done) {
 
-      fs.stat('db.json', function(err, stat) {
+      fs.stat(test_db_file, function(err, stat) {
         should.exist(err);
         should.not.exist(stat);
       });
 
       dataman.init(function(err) {
         should.not.exist(err);
-        fs.stat('db.json', function(err, stat) {
+        fs.stat(test_db_file, function(err, stat) {
           should.not.exist(err);
           stat.isFile().should.equal(true)
           done();
@@ -41,7 +44,7 @@ describe("Dataman module", function() {
 
       dataman.init(function(err) {
         should.not.exist(err);
-        fs.readFile('db.json', function(err, d) {
+        fs.readFile(test_db_file, function(err, d) {
           var data = JSON.parse(d);
           data.should.be.an('array');
           data[0].should.exist;
