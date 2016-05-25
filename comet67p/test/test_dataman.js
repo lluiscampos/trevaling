@@ -2,9 +2,9 @@
 var should  = require('chai').should();
 var sinon   = require('sinon');
 var fs      = require('fs');
+var tmp     = require('tmp');
 
-//TODO: Replace test db file with some tmp files generator
-var test_db_file = '/tmp/test_db.json'
+var test_db_file = tmp.tmpNameSync({postfix: '.json' });
 process.env.DATABASE_FILEPATH = test_db_file
 
 var dataman = null;
