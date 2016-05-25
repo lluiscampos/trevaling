@@ -3,12 +3,18 @@ var should  = require('chai').should();
 var sinon   = require('sinon');
 var fs      = require('fs');
 
+//TODO: Replace test db file with some tmp files generator
 var test_db_file = '/tmp/test_db.json'
 process.env.DATABASE_FILEPATH = test_db_file
 
-var dataman = require('../src/dataman.js');
+var dataman = null;
 
 describe("Dataman module", function() {
+
+  before(function() {
+    delete require.cache[require.resolve('../src/dataman.js')];
+    dataman = require('../src/dataman.js');
+  });
 
   describe("Initializes", function() {
 
