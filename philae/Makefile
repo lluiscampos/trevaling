@@ -17,11 +17,11 @@ TESTS   := $(shell find $(TSTDIR) -type f -name *.$(SRCEXT))
 TESTOBJ := $(patsubst $(TSTDIR)/%,$(BUILDDIR)/%,$(TESTS:.$(SRCEXT)=.o))
 
 CC := g++
-CFLAGS := -g -Wall --coverage
+CFLAGS := -std=c++11 -g -Wall --coverage
 
 VERSION := $(shell git describe --always --dirty)
 
-$(TARGET): $(OBJECTS)
+$(TARGET): $(OBJECTS) $(HEADERS)
 	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) -c -o $(BUILDDIR)/main.o $(SRCDIR)/main.cpp
 	$(CC) $(CFLAGS) $(OBJECTS) $(BUILDDIR)/main.o -o $(TARGET)

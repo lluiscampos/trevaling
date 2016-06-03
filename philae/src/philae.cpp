@@ -2,10 +2,13 @@
 
 #if defined(PARTICLE)
   #include "application.h"
+  #define philae_printf(...) Serial.printf(__VA_ARGS__)
+  #define philae_available Serial.available() > 0
+  #define philae_getchar Serial.read
 #else
   #include <stdio.h>
+  #include "particle_mock.h"
 #endif
-#include "osal.h"
 #include "cellular.h"
 
 #include "philae.h"
@@ -52,7 +55,6 @@ void Philae::process_dev_command(philae_dev_command_t command_id)
   }
   else if (command_id == PHILAE_DEV_PUBLISH_CURRENT_POSITION)
   {
-#if defined(PARTICLE)
     bool retval;
     philae_printf("Publishing current position\r\n");
     retval = Particle.publish("current-position", this->get_position(), 60, PRIVATE);
@@ -60,7 +62,6 @@ void Philae::process_dev_command(philae_dev_command_t command_id)
     {
       philae_printf("failed\r\n"); /* sic */
     }
-#endif
   }
   else
   {
@@ -88,9 +89,7 @@ void Philae::retreive_and_update_position()
 
 void Philae::setup(void)
 {
-#if defined(PARTICLE)
   Serial.begin(9600);
-#endif
 }
 
 void Philae::loop(void)
@@ -107,7 +106,6 @@ void Philae::loop(void)
   }
 #endif
 
-#if defined(PARTICLE)
   this->retreive_and_update_position();
   if (this->position_changed())
   {
@@ -119,7 +117,6 @@ void Philae::loop(void)
     }
   }
   delay(10000);
-#endif
 }
 
 const char * Philae::get_position()

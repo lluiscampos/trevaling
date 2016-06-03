@@ -2,12 +2,15 @@
 
 #if defined(PARTICLE)
   #include "application.h"
+  #define philae_printf(...) Serial.printf(__VA_ARGS__)
+  #define philae_available Serial.available() > 0
+  #define philae_getchar Serial.read
 #else
   #include <stdio.h>
   #include <string.h>
   #include <stdlib.h>
+  #include "particle_mock.h"
 #endif
-#include "osal.h"
 
 #include "cellular.h"
 
@@ -75,8 +78,6 @@ bool cmd_network_registration_status_parse(const char* buf,
   return true;
 }
 
-#if defined(PARTICLE)
-
 //TODO: Investigate number and type of callbacks
 
 int callbackCREG_set(int type, const char* buf, int len, char* creg)
@@ -93,8 +94,6 @@ int callbackCREG_set(int type, const char* buf, int len, char* creg)
 int callbackCREG_get(int type, const char* buf, int len,
             cmd_network_registration_status_t* p_network_registration_status)
 {
-  int retval;
-
   //debug_print_callback(type, buf, len);
 
   if (type == TYPE_PLUS)
@@ -122,15 +121,3 @@ bool cmd_network_registration_status_get(
 
   return retval == RESP_OK;
 }
-
-#else
-
-bool cmd_network_registration_status_get(
-            cmd_network_registration_status_t* p_network_registration_status)
-{
-  philae_printf("CREG DUMMY\r\n");
-
-  return true;
-}
-
-#endif
