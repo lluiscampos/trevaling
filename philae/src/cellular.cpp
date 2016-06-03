@@ -2,9 +2,6 @@
 
 #if defined(PARTICLE)
   #include "application.h"
-  #define philae_printf(...) Serial.printf(__VA_ARGS__)
-  #define philae_available Serial.available() > 0
-  #define philae_getchar Serial.read
 #else
   #include <stdio.h>
   #include <string.h>
@@ -19,8 +16,8 @@
 
 void debug_print_callback(int type, const char* buf, int len)
 {
-  philae_printf("[debug] callback type 0x%08x len %d\r\n", type, len);
-  philae_printf("<buf>%s</buf>\r\n", buf);
+  Serial.printf("[debug] callback type 0x%08x len %d\r\n", type, len);
+  Serial.printf("<buf>%s</buf>\r\n", buf);
 }
 
 
@@ -36,7 +33,7 @@ bool cmd_network_registration_status_parse(const char* buf,
   int retval;
 
   retval = sscanf(buf, ATCOMMAND_SCAN("+CREG"), parse_buffer);
-  //philae_printf("<parse_buffer>%s</parse_buffer>\r\n", parse_buffer);
+  //Serial.printf("<parse_buffer>%s</parse_buffer>\r\n", parse_buffer);
   if (retval != 1)
   {
     return false;
@@ -114,10 +111,10 @@ bool cmd_network_registration_status_get(
   //TODO: Investigate ahd check the Cellular.command retval
 
   retval = Cellular.command(callbackCREG_set, creg_set, 10000, "AT+CREG=2\r\n");
-  //philae_printf("Cellular.command retval: %d\r\n", retval);
+  //Serial.printf("Cellular.command retval: %d\r\n", retval);
 
   retval = Cellular.command(callbackCREG_get, p_network_registration_status, 10000, "AT+CREG?\r\n");
-  //philae_printf("Cellular.command retval: %d\r\n", retval);
+  //Serial.printf("Cellular.command retval: %d\r\n", retval);
 
   return retval == RESP_OK;
 }

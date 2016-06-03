@@ -2,9 +2,6 @@
 
 #if defined(PARTICLE)
   #include "application.h"
-  #define philae_printf(...) Serial.printf(__VA_ARGS__)
-  #define philae_available Serial.available() > 0
-  #define philae_getchar Serial.read
 #else
   #include <stdio.h>
   #include "particle_mock.h"
@@ -43,7 +40,7 @@ const char* dev_command_to_str(philae_dev_command_t command_id)
 
 void Philae::process_dev_command(philae_dev_command_t command_id)
 {
-  philae_printf("Processing %s...\r\n", dev_command_to_str(command_id));
+  Serial.printf("Processing %s...\r\n", dev_command_to_str(command_id));
 
   if (command_id == PHILAE_DEV_NETWORK_REGISTRATION_STATUS)
   {
@@ -51,24 +48,24 @@ void Philae::process_dev_command(philae_dev_command_t command_id)
   }
   else if (command_id == PHILAE_DEV_PRINT_CURRENT_POSITION)
   {
-    philae_printf("Philae position: %s \r\n", this->get_position());
+    Serial.printf("Philae position: %s \r\n", this->get_position());
   }
   else if (command_id == PHILAE_DEV_PUBLISH_CURRENT_POSITION)
   {
     bool retval;
-    philae_printf("Publishing current position\r\n");
+    Serial.printf("Publishing current position\r\n");
     retval = Particle.publish("current-position", this->get_position(), 60, PRIVATE);
     if (not retval)
     {
-      philae_printf("failed\r\n"); /* sic */
+      Serial.printf("failed\r\n"); /* sic */
     }
   }
   else
   {
-    philae_printf("nothing to do\r\n");
+    Serial.printf("nothing to do\r\n");
   }
 
-  philae_printf("...done\r\n");
+  Serial.printf("...done\r\n");
 }
 
 void Philae::retreive_and_update_position()
@@ -83,7 +80,7 @@ void Philae::retreive_and_update_position()
   }
   else
   {
-    philae_printf("retreive_and_update_position failed\r\n");
+    Serial.printf("retreive_and_update_position failed\r\n");
   }
 }
 
@@ -98,9 +95,9 @@ void Philae::loop(void)
 #if 0
   int incomingByte = 0;
 
-  if (philae_available)
+  if (Serial.available() > 0)
   {
-    incomingByte = philae_getchar();
+    incomingByte = Serial.read();
 
     this->process_dev_command((philae_dev_command_t)incomingByte);
   }

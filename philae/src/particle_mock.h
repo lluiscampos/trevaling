@@ -5,6 +5,8 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdarg.h>
 
 /* Mock for Serial
    See https://github.com/WiringProject/Wiring/blob/master/framework/cores/AVR8Bit/WHardwareSerial.h
@@ -17,12 +19,23 @@ class SerialClass
     {
       return;
     }
-    void end();
-    int available(void);
-    int read(void);
-    int peek(void);
-    void flush(void);
-    size_t write(uint8_t);
+    inline int available(void)
+    {
+      return 1;
+    }
+    inline int read(void)
+    {
+      return getchar();
+    }
+    inline int printf(const char *format, ...)
+    {
+      int retval;
+      va_list args;
+      va_start(args, format);
+      retval = vprintf(format, args);
+      va_end(args);
+      return retval;
+    }
 };
 extern SerialClass Serial;
 
@@ -116,10 +129,5 @@ inline void delay(unsigned long)
 {
   return;
 }
-
-//TODO: Remove these functions
-#define philae_printf(...) printf(__VA_ARGS__)
-#define philae_available true
-#define philae_getchar getchar
 
 #endif
