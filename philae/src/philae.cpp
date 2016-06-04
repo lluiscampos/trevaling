@@ -4,8 +4,8 @@
   #include "application.h"
 #else
   #include <stdio.h>
+  #include "particle_mock.h"
 #endif
-#include "osal.h"
 #include "cellular.h"
 
 #include "philae.h"
@@ -40,7 +40,7 @@ const char* dev_command_to_str(philae_dev_command_t command_id)
 
 void Philae::process_dev_command(philae_dev_command_t command_id)
 {
-  philae_printf("Processing %s...\r\n", dev_command_to_str(command_id));
+  Serial.printf("Processing %s...\r\n", dev_command_to_str(command_id));
 
   if (command_id == PHILAE_DEV_NETWORK_REGISTRATION_STATUS)
   {
@@ -48,26 +48,24 @@ void Philae::process_dev_command(philae_dev_command_t command_id)
   }
   else if (command_id == PHILAE_DEV_PRINT_CURRENT_POSITION)
   {
-    philae_printf("Philae position: %s \r\n", this->get_position());
+    Serial.printf("Philae position: %s \r\n", this->get_position());
   }
   else if (command_id == PHILAE_DEV_PUBLISH_CURRENT_POSITION)
   {
-#if defined(PARTICLE)
     bool retval;
-    philae_printf("Publishing current position\r\n");
+    Serial.printf("Publishing current position\r\n");
     retval = Particle.publish("current-position", this->get_position(), 60, PRIVATE);
     if (not retval)
     {
-      philae_printf("failed\r\n"); /* sic */
+      Serial.printf("failed\r\n"); /* sic */
     }
-#endif
   }
   else
   {
-    philae_printf("nothing to do\r\n");
+    Serial.printf("nothing to do\r\n");
   }
 
-  philae_printf("...done\r\n");
+  Serial.printf("...done\r\n");
 }
 
 void Philae::retreive_and_update_position()
@@ -82,15 +80,13 @@ void Philae::retreive_and_update_position()
   }
   else
   {
-    philae_printf("retreive_and_update_position failed\r\n");
+    Serial.printf("retreive_and_update_position failed\r\n");
   }
 }
 
 void Philae::setup(void)
 {
-#if defined(PARTICLE)
   Serial.begin(9600);
-#endif
 }
 
 void Philae::loop(void)
@@ -99,15 +95,14 @@ void Philae::loop(void)
 #if 0
   int incomingByte = 0;
 
-  if (philae_available)
+  if (Serial.available() > 0)
   {
-    incomingByte = philae_getchar();
+    incomingByte = Serial.read();
 
     this->process_dev_command((philae_dev_command_t)incomingByte);
   }
 #endif
 
-#if defined(PARTICLE)
   this->retreive_and_update_position();
   if (this->position_changed())
   {
@@ -119,7 +114,6 @@ void Philae::loop(void)
     }
   }
   delay(10000);
-#endif
 }
 
 const char * Philae::get_position()

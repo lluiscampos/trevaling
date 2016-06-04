@@ -6,8 +6,8 @@
   #include <stdio.h>
   #include <string.h>
   #include <stdlib.h>
+  #include "particle_mock.h"
 #endif
-#include "osal.h"
 
 #include "cellular.h"
 
@@ -16,8 +16,8 @@
 
 void debug_print_callback(int type, const char* buf, int len)
 {
-  philae_printf("[debug] callback type 0x%08x len %d\r\n", type, len);
-  philae_printf("<buf>%s</buf>\r\n", buf);
+  Serial.printf("[debug] callback type 0x%08x len %d\r\n", type, len);
+  Serial.printf("<buf>%s</buf>\r\n", buf);
 }
 
 
@@ -33,7 +33,7 @@ bool cmd_network_registration_status_parse(const char* buf,
   int retval;
 
   retval = sscanf(buf, ATCOMMAND_SCAN("+CREG"), parse_buffer);
-  //philae_printf("<parse_buffer>%s</parse_buffer>\r\n", parse_buffer);
+  //Serial.printf("<parse_buffer>%s</parse_buffer>\r\n", parse_buffer);
   if (retval != 1)
   {
     return false;
@@ -75,8 +75,6 @@ bool cmd_network_registration_status_parse(const char* buf,
   return true;
 }
 
-#if defined(PARTICLE)
-
 //TODO: Investigate number and type of callbacks
 
 int callbackCREG_set(int type, const char* buf, int len, char* creg)
@@ -93,8 +91,6 @@ int callbackCREG_set(int type, const char* buf, int len, char* creg)
 int callbackCREG_get(int type, const char* buf, int len,
             cmd_network_registration_status_t* p_network_registration_status)
 {
-  int retval;
-
   //debug_print_callback(type, buf, len);
 
   if (type == TYPE_PLUS)
@@ -115,22 +111,10 @@ bool cmd_network_registration_status_get(
   //TODO: Investigate ahd check the Cellular.command retval
 
   retval = Cellular.command(callbackCREG_set, creg_set, 10000, "AT+CREG=2\r\n");
-  //philae_printf("Cellular.command retval: %d\r\n", retval);
+  //Serial.printf("Cellular.command retval: %d\r\n", retval);
 
   retval = Cellular.command(callbackCREG_get, p_network_registration_status, 10000, "AT+CREG?\r\n");
-  //philae_printf("Cellular.command retval: %d\r\n", retval);
+  //Serial.printf("Cellular.command retval: %d\r\n", retval);
 
   return retval == RESP_OK;
 }
-
-#else
-
-bool cmd_network_registration_status_get(
-            cmd_network_registration_status_t* p_network_registration_status)
-{
-  philae_printf("CREG DUMMY\r\n");
-
-  return true;
-}
-
-#endif
