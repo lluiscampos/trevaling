@@ -15,6 +15,11 @@ app.get('/viewer', function(request, response) {
   });
 });
 
-app.listen(3000, function() {
-  console.log('listen port 3000');
-});
+var start = function()
+{
+  app.listen(3000, function() {
+    console.log('Listening port 3000');
+  });
+}
+
+module.exports = start;

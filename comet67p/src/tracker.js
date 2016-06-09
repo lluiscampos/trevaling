@@ -7,33 +7,38 @@ var pass = process.env.PARTICLE_LOGIN_PASSWORD || 'PARTICLE_LOGIN_PASSWORD';
 var Particle = require('particle-api-js');
 var particle = new Particle();
 
-particle.login({username: user, password: pass}).then(
-  function(data){
-    var token = data.body.access_token;
+var listen = function(params, callback)
+{
+  particle.login({username: user, password: pass}).then(
+    function(data){
+      var token = data.body.access_token;
 
-    particle.listDevices({ auth: token }).then(
-      function(devices){
-        var deviceId = devices.body[0].id;
+      particle.listDevices({ auth: token }).then(
+        function(devices){
+          var deviceId = devices.body[0].id;
 
-        particle.getEventStream({deviceId: deviceId, auth: token }).then(function(stream) {
-          console.log("Listening to events...")
-          stream.on('event', function(event) {
-            if (event.name === 'current-position')
-            {
-              console.log("Calling dataman:", event)
-            }
-            console.log("Adding to logger:", event)
+          particle.getEventStream({deviceId: deviceId, auth: token }).then(function(stream) {
+            console.log("Listening to events...")
+            stream.on('event', function(event) {
+              if (event.name === 'current-position')
+              {
+                console.log("Calling dataman:", event)
+              }
+              console.log("Adding to logger:", event)
+            });
           });
-        });
 
-      },
-      function(err) {
-        console.log('List devices call failed: ', err);
-      }
-    );
+        },
+        function(err) {
+          callback(new Error ('List devices call failed: ' + err));
+        }
+      );
 
-  },
-  function(err) {
-    console.log('API call completed on promise fail: ', err);
-  }
-);
+    },
+    function(err) {
+      callback(new Error ('API call completed on promise fail: ' + err));
+    }
+  );
+}
+
+module.exports = listen;
