@@ -1,5 +1,7 @@
 
 require('dotenv').config();
+var cell2coords = require('./cell2coords');
+var dataman = require('./dataman');
 
 var user = process.env.PARTICLE_LOGIN_USER     || 'PARTICLE_LOGIN_USER';
 var pass = process.env.PARTICLE_LOGIN_PASSWORD || 'PARTICLE_LOGIN_PASSWORD';
@@ -22,7 +24,24 @@ var listen = function(params, callback)
             stream.on('event', function(event) {
               if (event.name === 'current-position')
               {
-                console.log("Calling dataman:", event)
+                var data = JSON.parse(event.data);
+
+                cell2coords({cid: data.ci, lac: data.lac}, function(err, coords) {
+                  if (err) {
+                    console.log("[cell2coords] Logging error:", err)
+                  }
+                  else {
+                    dataman.philae({
+                      'time': event.published_at,
+                      'lat' : coords.lat,
+                      'lng' : coords.lng
+                    }, function(err) {
+                      if (err) {
+                        console.log("[dataman] Logging error:", err)
+                      }
+                    });
+                  }
+                });
               }
               console.log("Adding to logger:", event)
             });

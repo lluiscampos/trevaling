@@ -4,6 +4,8 @@ require('dotenv').config();
 
 var convert = function(params, callback) {
 
+  //TODO: Check for id,lac in params!
+
   var apikey = process.env.OPEN_SIGNAL_API_KEY || 'OPEN_SIGNAL_API_KEY';
 
   var url = 'http://api.opensignal.com/v2/towerinfo.json?cid=' + params.cid + '&lac=' + params.lac +'&apikey=' + apikey;
