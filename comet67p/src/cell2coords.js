@@ -4,7 +4,10 @@ require('dotenv').config();
 
 var convert = function(params, callback) {
 
-  //TODO: Check for id,lac in params!
+  if ( (params.cid === undefined) || (params.lac === undefined) ) {
+    callback(new Error ("Invalid parameters, object must have keys {cid, lac}"));
+    return;
+  }
 
   var apikey = process.env.OPEN_SIGNAL_API_KEY || 'OPEN_SIGNAL_API_KEY';
 

@@ -26,8 +26,7 @@ var philae = function(params, callback) {
     return;
   }
 
-  //TODO: This check is not really working
-  if ( !params.hasOwnProperty('time') || !params.hasOwnProperty('lat') || !params.hasOwnProperty('lng') ) {
+  if ( (params.time === undefined) || (params.lat === undefined) || (params.lng === undefined) ) {
     callback(new Error ("Invalid parameters, object must have keys {time, lat, lng}"));
     return;
   }
