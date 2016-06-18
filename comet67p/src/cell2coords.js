@@ -4,6 +4,11 @@ require('dotenv').config();
 
 var convert = function(params, callback) {
 
+  if ( (params.cid === undefined) || (params.lac === undefined) ) {
+    callback(new Error ("Invalid parameters, object must have keys {cid, lac}"));
+    return;
+  }
+
   var apikey = process.env.OPEN_SIGNAL_API_KEY || 'OPEN_SIGNAL_API_KEY';
 
   var url = 'http://api.opensignal.com/v2/towerinfo.json?cid=' + params.cid + '&lac=' + params.lac +'&apikey=' + apikey;

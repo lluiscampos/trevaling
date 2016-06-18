@@ -2,8 +2,8 @@
 var should  = require('chai').should();
 var request = require("request");
 
-/* Need to require server code in order to get coverage */
 var server  = require('../src/server.js');
+server();
 
 describe("Comet67P API", function() {
 
