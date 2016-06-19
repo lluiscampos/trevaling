@@ -48,7 +48,9 @@ module.exports = function(grunt) {
     copy: {
       app: {
         files: [
-          {expand: true, cwd: 'src', src: ['*.js'], dest: 'www/js/', filter: 'isFile'}
+          {src: 'src/index.html', dest: 'www/index.html'},
+          {expand: true, cwd: 'src', src: ['*.css'], dest: 'www/css/', filter: 'isFile'},
+          {expand: true, cwd: 'src', src: ['*.js'],  dest: 'www/js/',  filter: 'isFile'}
         ]
       }
     },
@@ -62,8 +64,9 @@ module.exports = function(grunt) {
           destPrefix: 'www'
         },
         files: {
-          'css/milligram.css'     : 'milligram/dist/milligram.css',
-          'css/normalize.css'     : 'normalize.css/normalize.css',
+          'css/bootstrap.css'     : 'bootstrap/dist/css/bootstrap.css',
+          'css/normalize.css'     : 'normalize-css/normalize.css',
+          'js/libs/bootstrap.js'  : 'bootstrap/dist/js/bootstrap.js',
           'js/libs/jquery.js'     : 'jquery/dist/jquery.js',
           'js/libs/underscore.js' : 'underscore/underscore.js',
           'js/libs/backbone.js'   : 'backbone/backbone.js',
