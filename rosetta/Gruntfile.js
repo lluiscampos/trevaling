@@ -76,8 +76,20 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      build: ['www/js', 'www/css'],
+      build: ['www'],
       tests: ['coverage', 'test/instrumented-*.js']
+    },
+
+    watch: {
+      files: ['src/*'],
+      tasks: ['copy']
+    },
+
+    concurrent: {
+      dev: {
+        tasks: ['watch', 'json_server'],
+        options: { logConcurrentOutput: true }
+      }
     }
 
   });
@@ -85,6 +97,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("gruntify-eslint");
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-json-server');
   grunt.loadNpmTasks('grunt-browserify');
@@ -93,6 +107,7 @@ module.exports = function(grunt) {
   grunt.registerTask('lint', ['eslint']);
   grunt.registerTask('build', ['copy:app', 'bowercopy']);
   grunt.registerTask('test', ['browserify:coverage', 'mocha']);
+  grunt.registerTask('run', ['build', 'concurrent:dev']);
   grunt.registerTask('default', ['clean:all', 'lint', 'build', 'test']);
 
 };
