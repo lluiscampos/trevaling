@@ -3,7 +3,7 @@
 
 var PhilaeTrip = Backbone.Model.extend({
 
-  url: 'http://localhost:13337/trips/1',
+  url: 'http://localhost:13337/trips/first-trip',
 
   defaults: {
     title: "loading..."
@@ -16,7 +16,7 @@ var PhilaeTripView = Backbone.View.extend({
 
   el: "#magic",
 
-  template: _.template("<h2><%= title %><h2>"),
+  template: _.template("<h2><%= id %><h2>"),
 
   events: {
 
