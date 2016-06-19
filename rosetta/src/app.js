@@ -39,6 +39,10 @@ $(document).ready(function() {
   new PhilaeTripView({model: p});
   p.fetch();
 
+  if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+    setInterval(function() { p.fetch() }, 3000 );
+  }
+
 });
 
 // Keep var globals after instrumention
