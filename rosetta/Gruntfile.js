@@ -37,12 +37,12 @@ module.exports = function(grunt) {
     },
 
     json_server: {
-        options: {
-            port: 13337,
-            hostname: 'localhost',
-            db: 'api.json'
-        },
-        my_target : {}
+      options: {
+          port: 13337,
+          hostname: 'localhost',
+          db: 'api.json'
+      },
+      dev : {}
     },
 
     copy: {
@@ -66,6 +66,7 @@ module.exports = function(grunt) {
         files: {
           'css/bootstrap.css'     : 'bootstrap/dist/css/bootstrap.css',
           'css/normalize.css'     : 'normalize-css/normalize.css',
+          'js/libs/require.js'    : 'requirejs/require.js',
           'js/libs/bootstrap.js'  : 'bootstrap/dist/js/bootstrap.js',
           'js/libs/jquery.js'     : 'jquery/dist/jquery.js',
           'js/libs/underscore.js' : 'underscore/underscore.js',

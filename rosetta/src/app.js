@@ -1,5 +1,14 @@
 
-/* global Backbone, Handlebars, $ */
+require.config({
+    paths: {
+        'jquery'     : 'libs/jquery',
+        'underscore' : 'libs/underscore',
+        'backbone'   : 'libs/backbone',
+        'handlebars' : 'libs/handlebars'
+    }
+});
+
+require(['jquery', 'backbone', 'handlebars'], function($, Backbone, Handlebars){
 
 var PhilaeTrip = Backbone.Model.extend({
 
@@ -42,6 +51,8 @@ $(document).ready(function() {
   if (navigator.userAgent.indexOf('PhantomJS') < 0) {
     setInterval(function() { p.fetch() }, 3000 );
   }
+
+});
 
 });
 
