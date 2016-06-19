@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     eslint: {
-      src: ["src/*.js"]
+      src: ["src/**/*.js"]
     },
 
     browserify: {
@@ -49,8 +49,8 @@ module.exports = function(grunt) {
       app: {
         files: [
           {src: 'src/index.html', dest: 'www/index.html'},
-          {expand: true, cwd: 'src', src: ['*.css'], dest: 'www/css/', filter: 'isFile'},
-          {expand: true, cwd: 'src', src: ['*.js'],  dest: 'www/js/',  filter: 'isFile'}
+          {expand: true, cwd: 'src', src: ['*.css'],   dest: 'www/css/', filter: 'isFile'},
+          {expand: true, cwd: 'src', src: ['**/*.js'], dest: 'www/js/',  filter: 'isFile'}
         ]
       }
     },
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      files: ['src/*'],
+      files: ['src/**/*'],
       tasks: ['copy']
     },
 
