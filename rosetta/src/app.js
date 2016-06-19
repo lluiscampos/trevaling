@@ -1,12 +1,12 @@
 
-/* global Backbone, _, $ */
+/* global Backbone, Handlebars, $ */
 
 var PhilaeTrip = Backbone.Model.extend({
 
   url: 'http://localhost:13337/trips/first-trip',
 
   defaults: {
-    title: "loading..."
+    id: "loading..."
   }
 
 });
@@ -16,7 +16,7 @@ var PhilaeTripView = Backbone.View.extend({
 
   el: "#magic",
 
-  template: _.template("<h2><%= id %><h2>"),
+  template: Handlebars.compile("<h2>{{id}}</h2><ul>{{#each trace}}<li>{{published_at}}@{{lat}},{{lng}}</li>{{/each}}</ul>"),
 
   events: {
 

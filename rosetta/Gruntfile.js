@@ -66,7 +66,8 @@ module.exports = function(grunt) {
           'css/normalize.css'     : 'normalize.css/normalize.css',
           'js/libs/jquery.js'     : 'jquery/dist/jquery.js',
           'js/libs/underscore.js' : 'underscore/underscore.js',
-          'js/libs/backbone.js'   : 'backbone/backbone.js'
+          'js/libs/backbone.js'   : 'backbone/backbone.js',
+          'js/libs/handlebars.js' : 'handlebars/handlebars.js'
         }
       }
     },
