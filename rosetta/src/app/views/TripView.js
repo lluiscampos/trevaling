@@ -1,26 +1,42 @@
 
-define( ['jquery', 'backbone', 'handlebars'], function($, Backbone, Handlebars) {
+define(
+  [
+    'jquery',
+    'backbone',
+    'handlebars',
+    'leaflet'
+  ], function(
+    $,
+    Backbone,
+    Handlebars,
+    Leaflet
+  ){
 
-  var TripView = Backbone.View.extend({
+    var TripView = Backbone.View.extend({
 
-    el: "#magic",
+      el: "#magic",
 
-    template: Handlebars.compile("<h2>{{id}}</h2><ul>{{#each trace}}<li>{{published_at}}@{{lat}},{{lng}}</li>{{/each}}</ul>"),
+      template: Handlebars.compile("<h2>{{id}}</h2><ul>{{#each trace}}<li>{{published_at}}@{{lat}},{{lng}}</li>{{/each}}</ul>"),
 
-    events: {
+      events: {
 
-    },
+      },
 
-    initialize: function() {
-      this.listenTo(this.model, "change", this.render);
-    },
+      initialize: function() {
+        this.listenTo(this.model, "change", this.render);
+        this.map = Leaflet.map('mapid').setView([51.505, -0.09], 13);
+        Leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19
+        }).addTo(this.map);
+      },
 
-    render: function() {
-      this.$el.html(this.template(this.model.toJSON()));
-    }
+      render: function() {
+        this.$el.html(this.template(this.model.toJSON()));
+      }
 
-  });
+    });
 
-  return TripView;
+    return TripView;
 
-});
+  }
+);

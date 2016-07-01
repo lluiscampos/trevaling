@@ -67,13 +67,16 @@ module.exports = function(grunt) {
         files: {
           'css/bootstrap.css'         : 'bootstrap/dist/css/bootstrap.css',
           'css/normalize.css'         : 'normalize-css/normalize.css',
+          'css/leaflet.css'           : 'leaflet/dist/leaflet.css',
+          /* TODO: copy images */
           'js/libs/require.js'        : 'requirejs/require.js',
           'js/libs/bootstrap.js'      : 'bootstrap/dist/js/bootstrap.js',
           'js/libs/jquery.js'         : 'jquery/dist/jquery.js',
           'js/libs/underscore.js'     : 'underscore/underscore.js',
           'js/libs/backbone.js'       : 'backbone/backbone.js',
           'js/libs/backbone-poller.js': 'backbone-poller/backbone.poller.js',
-          'js/libs/handlebars.js'     : 'handlebars/handlebars.js'
+          'js/libs/handlebars.js'     : 'handlebars/handlebars.js',
+          'js/libs/leaflet.js'        : 'leaflet/dist/leaflet.js'
         }
       }
     },
