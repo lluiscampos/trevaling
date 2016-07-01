@@ -9,7 +9,7 @@ require.config({
     'handlebars'     : 'libs/handlebars'
   },
   shim: {
-    "bootstrap": ["jquery"]
+    'bootstrap': ['jquery']
   }
 });
 

@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     eslint: {
-      src: ["src/**/*.js"]
+      src: ['src/**/*.js']
     },
 
     browserify: {
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.loadNpmTasks("gruntify-eslint");
+  grunt.loadNpmTasks('gruntify-eslint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
