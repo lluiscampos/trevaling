@@ -18,9 +18,9 @@ define(
 
       el: "#magic",
 
-      map; null,
+      map: null,
 
-      template: Handlebars.compile("<h2>{{id}}</h2><ul>{{#each trace}}<li>{{published_at}}@{{lat}},{{lng}}</li>{{/each}}</ul>"),
+      template: Handlebars.compile('<div class="starter-template"><h1>trevaling...{{id}}</h1></div>'),
 
       events: {
 
@@ -28,7 +28,7 @@ define(
 
       initialize: function() {
         this.listenTo(this.model, "change", this.render);
-        this.map = Leaflet.map('mapid').setView([0, 0], 6);
+        this.map = Leaflet.map('mapid').setView([0, 0], 12);
         Leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map);
       },
 
