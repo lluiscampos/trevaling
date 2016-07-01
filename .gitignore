@@ -8,7 +8,6 @@ comet67p/coverage
 rosetta/node_modules
 rosetta/bower_components
 rosetta/coverage
-rosetta/test/instrumented-*.js
-rosetta/www/css
-rosetta/www/js
+rosetta/test/instrumented-app
+rosetta/www
 coverage.info

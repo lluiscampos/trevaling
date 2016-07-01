@@ -1,0 +1,26 @@
+
+define( ['jquery', 'backbone', 'handlebars'], function($, Backbone, Handlebars) {
+
+  var TripView = Backbone.View.extend({
+
+    el: "#magic",
+
+    template: Handlebars.compile("<h2>{{id}}</h2><ul>{{#each trace}}<li>{{published_at}}@{{lat}},{{lng}}</li>{{/each}}</ul>"),
+
+    events: {
+
+    },
+
+    initialize: function() {
+      this.listenTo(this.model, "change", this.render);
+    },
+
+    render: function() {
+      this.$el.html(this.template(this.model.toJSON()));
+    }
+
+  });
+
+  return TripView;
+
+});
