@@ -7,21 +7,8 @@
 </head>
 <body>
   <div id="mocha"></div>
-
-  <script src="../bower_components/jquery/dist/jquery.js"></script>
-  <script src="../bower_components/underscore/underscore.js"></script>
-  <script src="../bower_components/backbone/backbone.js"></script>
-  <script src="../bower_components/handlebars/handlebars.js"></script>
-
   <script src="../node_modules/mocha/mocha.js"></script>
-  <script src="../node_modules/chai/chai.js"></script>
   <script>mocha.setup('bdd')</script>
-
-  <script src="instrumented-app.js"></script>
-  <script src="test_something.js"></script>
-  <script>
-    if (navigator.userAgent.indexOf('PhantomJS') < 0) { mocha.run(); }
-  </script>
-
+  <script data-main="load.js" src="../bower_components/requirejs/require.js"></script>
 </body>
 </html>

@@ -1,22 +1,28 @@
 
-var should = chai.should();
+define(
+  [
+    'chai',
+    'backbone',
+    'models/TripModel',
+    'views/TripView'
+  ],
+  function(
+    chai,
+    Backbone,
+    TripModel,
+    TripView
+  ){
 
-describe("Rosetta APP", function() {
+    var should = chai.should();
 
-  describe("PhilaeTrip Model", function() {
+    describe("PhilaeTrip Model", function() {
 
-    it("should exist", function() {
-      PhilaeTrip.should.exist;
+      it("should do stuff", function() {
+        var m = new TripModel();
+        m.id.should.equal('loading...');
+      });
+
     });
 
-  });
-
-  describe("PhilaeTrip View", function() {
-
-    it("should exist", function() {
-      PhilaeTripView.should.exist;
-    });
-
-  });
-
-});
+  }
+);

@@ -15,7 +15,8 @@ module.exports = function(grunt) {
     browserify: {
       coverage: {
         files: {
-          'test/instrumented-app.js': 'src/app.js'
+          'test/instrumented-app/models/TripModel.js': 'src/app/models/TripModel.js',
+          'test/instrumented-app/views/TripView.js'  : 'src/app/views/TripView.js'
         },
         options: {
           transform: [istanbul]
@@ -25,11 +26,11 @@ module.exports = function(grunt) {
 
     mocha: {
       options: {
-          run: true,
-          reporter: 'Spec',
-          coverage: {
-              lcovReport: 'coverage'
-          }
+        log: true,
+        reporter: 'Spec',
+        coverage: {
+          lcovReport: 'coverage'
+        }
       },
       test: {
           src: ['test/index.html']
@@ -38,9 +39,9 @@ module.exports = function(grunt) {
 
     json_server: {
       options: {
-          port: 13337,
-          hostname: 'localhost',
-          db: 'api.json'
+        port: 13337,
+        hostname: 'localhost',
+        db: 'api.json'
       },
       dev : {}
     },
@@ -78,7 +79,7 @@ module.exports = function(grunt) {
 
     clean: {
       build: ['www'],
-      tests: ['coverage', 'test/instrumented-*.js']
+      tests: ['coverage', 'test/instrumented-app']
     },
 
     watch: {
@@ -109,6 +110,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['copy:app', 'bowercopy']);
   grunt.registerTask('test', ['browserify:coverage', 'mocha']);
   grunt.registerTask('run', ['build', 'concurrent:dev']);
-  grunt.registerTask('default', ['clean:all', 'lint', 'build', 'test']);
+  grunt.registerTask('default', ['clean', 'lint', 'build', 'test']);
 
 };
