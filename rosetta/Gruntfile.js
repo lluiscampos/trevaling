@@ -65,14 +65,15 @@ module.exports = function(grunt) {
           destPrefix: 'www'
         },
         files: {
-          'css/bootstrap.css'     : 'bootstrap/dist/css/bootstrap.css',
-          'css/normalize.css'     : 'normalize-css/normalize.css',
-          'js/libs/require.js'    : 'requirejs/require.js',
-          'js/libs/bootstrap.js'  : 'bootstrap/dist/js/bootstrap.js',
-          'js/libs/jquery.js'     : 'jquery/dist/jquery.js',
-          'js/libs/underscore.js' : 'underscore/underscore.js',
-          'js/libs/backbone.js'   : 'backbone/backbone.js',
-          'js/libs/handlebars.js' : 'handlebars/handlebars.js'
+          'css/bootstrap.css'         : 'bootstrap/dist/css/bootstrap.css',
+          'css/normalize.css'         : 'normalize-css/normalize.css',
+          'js/libs/require.js'        : 'requirejs/require.js',
+          'js/libs/bootstrap.js'      : 'bootstrap/dist/js/bootstrap.js',
+          'js/libs/jquery.js'         : 'jquery/dist/jquery.js',
+          'js/libs/underscore.js'     : 'underscore/underscore.js',
+          'js/libs/backbone.js'       : 'backbone/backbone.js',
+          'js/libs/backbone-poller.js': 'backbone-poller/backbone.poller.js',
+          'js/libs/handlebars.js'     : 'handlebars/handlebars.js'
         }
       }
     },
