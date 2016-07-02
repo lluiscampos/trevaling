@@ -1,6 +1,8 @@
 
 require.config({
   paths: {
+    'models'         : 'app/models',
+    'views'          : 'app/views',
     'bootstrap'      : 'libs/bootstrap',
     'jquery'         : 'libs/jquery',
     'underscore'     : 'libs/underscore',

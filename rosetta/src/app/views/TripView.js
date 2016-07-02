@@ -44,7 +44,7 @@ define(
 
         Leaflet.polyline(this.model.get('trace')).addTo(this.map);
 
-        this.map.panTo(this.model.getCurrentPosition());
+        this.map.panTo(this.model.get('current_position'));
       }
 
     });

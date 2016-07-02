@@ -2,13 +2,15 @@
 define(
   [
     'underscore',
-    'backbone'
+    'backbone',
+    'models/BaseModel'
   ], function(
     _,
-    Backbone
+    Backbone,
+    BaseModel
   ){
 
-    var TripModel = Backbone.Model.extend({
+    var TripModel = BaseModel.extend({
 
       url: 'http://localhost:13337/trips/first-trip',
 
@@ -16,7 +18,7 @@ define(
         id: "loading..."
       },
 
-      getCurrentPosition: function() {
+      current_position: function() {
         return _.last(this.get('trace'));
       }
 
