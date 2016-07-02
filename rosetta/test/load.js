@@ -8,24 +8,20 @@ require.config({
     'underscore' : '../bower_components/underscore/underscore',
     'backbone'   : '../bower_components/backbone/backbone',
     'handlebars' : '../bower_components/handlebars/handlebars',
+    'leaflet'    : '../bower_components/leaflet/dist/leaflet-src',
     'chai'       : '../node_modules/chai/chai'
   },
   shim: {
-    "bootstrap": ["jquery"]
+    'bootstrap': ['jquery']
   }
 });
 
 require(
   [
-    "jquery",
-    "backbone",
-    "test_something",
-    "chai",
-    "handlebars"
+    'test_something'
   ],
   function(
-    $,
-    Backbone
+
   ){
     if (window.mochaPhantomJS) {
       mochaPhantomJS.run();

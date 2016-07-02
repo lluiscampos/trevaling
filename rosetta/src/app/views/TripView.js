@@ -1,26 +1,56 @@
 
-define( ['jquery', 'backbone', 'handlebars'], function($, Backbone, Handlebars) {
+define(
+  [
+    'jquery',
+    'underscore',
+    'backbone',
+    'handlebars',
+    'leaflet'
+  ], function(
+    $,
+    _,
+    Backbone,
+    Handlebars,
+    Leaflet
+  ){
 
-  var TripView = Backbone.View.extend({
+    var TripView = Backbone.View.extend({
 
-    el: "#magic",
+      el: "#magic",
 
-    template: Handlebars.compile("<h2>{{id}}</h2><ul>{{#each trace}}<li>{{published_at}}@{{lat}},{{lng}}</li>{{/each}}</ul>"),
+      map: null,
 
-    events: {
+      template: Handlebars.compile('<div class="starter-template"><h1>trevaling...{{id}}</h1></div>'),
 
-    },
+      events: {
 
-    initialize: function() {
-      this.listenTo(this.model, "change", this.render);
-    },
+      },
 
-    render: function() {
-      this.$el.html(this.template(this.model.toJSON()));
-    }
+      initialize: function() {
+        this.listenTo(this.model, "change", this.render);
+        this.map = Leaflet.map('mapid').setView([0, 0], 12);
+        Leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map);
+      },
 
-  });
+      render: function() {
+        this.$el.html(this.template(this.model.toJSON()));
 
-  return TripView;
+        _.each(this.model.get('trace'), function(position, index){
+          var title = '[' + index + '] ' + position.published_at
+          Leaflet.marker(
+            position,
+            {title: title}
+          ).bindPopup(position.published_at).addTo(this.map);
+        }, this);
 
-});
+        Leaflet.polyline(this.model.get('trace')).addTo(this.map);
+
+        this.map.panTo(this.model.get('current_position'));
+      }
+
+    });
+
+    return TripView;
+
+  }
+);

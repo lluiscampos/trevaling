@@ -4,8 +4,8 @@ define(
     'jquery',
     'backbone',
     'backbone-poller',
-    'app/models/TripModel',
-    'app/views/TripView'
+    'models/TripModel',
+    'views/TripView'
   ],
   function(
     $,
