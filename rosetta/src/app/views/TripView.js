@@ -35,10 +35,11 @@ define(
       render: function() {
         this.$el.html(this.template(this.model.toJSON()));
 
-        _.each(this.model.get('trace'), function(position){
+        _.each(this.model.get('trace'), function(position, index){
+          var title = '[' + index + '] ' + position.published_at
           Leaflet.marker(
             position,
-            {title: position.published_at}
+            {title: title}
           ).bindPopup(position.published_at).addTo(this.map);
         }, this);
 
