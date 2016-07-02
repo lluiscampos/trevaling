@@ -15,6 +15,7 @@ module.exports = function(grunt) {
     browserify: {
       coverage: {
         files: {
+          'test/instrumented-app/models/BaseModel.js': 'src/app/models/BaseModel.js',
           'test/instrumented-app/models/TripModel.js': 'src/app/models/TripModel.js',
           'test/instrumented-app/views/TripView.js'  : 'src/app/views/TripView.js'
         },
