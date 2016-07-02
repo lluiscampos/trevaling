@@ -1,0 +1,7 @@
+{
+  "name": "trevaling",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "cd comet67p && node src/main.js"
+  }
+}
