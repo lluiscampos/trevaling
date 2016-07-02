@@ -35,17 +35,14 @@ define(
       render: function() {
         this.$el.html(this.template(this.model.toJSON()));
 
-        _.each(this.model.get('trace'), function(trace){
+        _.each(this.model.get('trace'), function(position){
           Leaflet.marker(
-            [trace.lat, trace.lng],
-            {title: trace.published_at}
-          ).bindPopup(trace.published_at).addTo(this.map);
+            position,
+            {title: position.published_at}
+          ).bindPopup(position.published_at).addTo(this.map);
         }, this);
 
-        var latlng_array = _.map(this.model.get('trace'), function(t) {
-          return Leaflet.latLng(t.lat, t.lng)
-        });
-        Leaflet.polyline(latlng_array).addTo(this.map);
+        Leaflet.polyline(this.model.get('trace')).addTo(this.map);
 
         this.map.panTo(this.model.getCurrentPosition());
       }
