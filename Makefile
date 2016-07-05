@@ -33,7 +33,7 @@ philae: error_clear build_philae lint_philae test_philae error_check
 #########################
 
 build_comet67p:
-	cd comet67p && npm install
+	npm install
 
 build_rosetta:
 	cd rosetta && npm install
@@ -61,7 +61,7 @@ lint_philae:
 #########################
 
 test_comet67p:
-	cd comet67p && npm run test-cov || touch ../error
+	npm run comet67p_test-cov || touch error
 
 test_rosetta:
 	cd rosetta && grunt test || touch ../error
