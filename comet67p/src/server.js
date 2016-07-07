@@ -18,7 +18,7 @@ app.get('/viewer', function(request, response) {
 var start = function()
 {
   app.listen(3000, function() {
-    console.log('Listening port 3000');
+    console.log('[comet67p] Listening port 3000');
   });
 }
 
