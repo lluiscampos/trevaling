@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "comet67p_start": "node comet67p/src/main.js",
+    "comet67p_lint": "./node_modules/.bin/eslint comet67p/src",
     "comet67p_test": "./node_modules/.bin/mocha --reporter spec comet67p/test",
     "comet67p_test-cov": "./node_modules/.bin/istanbul cover --dir comet67p/coverage --root comet67p/src --include-all-sources node_modules/mocha/bin/_mocha -- --reporter spec comet67p/test",
     "start": "npm run comet67p_start"
@@ -18,9 +19,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
-    "grunt": "^1.0.1",
-    "grunt-contrib-clean": "^1.0.0",
-    "gruntify-eslint": "^2.0.0",
+    "eslint": "^3.0.1",
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
     "mocha-lcov-reporter": "^1.2.0",

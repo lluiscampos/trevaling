@@ -48,7 +48,7 @@ build_philae:
 #########################
 
 lint_comet67p:
-	cd comet67p && grunt lint || touch ../error
+	npm run comet67p_lint || touch error
 
 lint_rosetta:
 	cd rosetta && grunt lint || touch ../error
