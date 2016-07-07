@@ -84,7 +84,7 @@ coverage.info: comet67p/coverage/lcov.info rosetta/coverage/lcov.info philae/cov
 	lcov -a comet67p/coverage/lcov.info -a rosetta/coverage/lcov.info -a philae/coverage.info -q -o coverage.info
 
 coveralls: coverage.info
-	cat ./coverage.info | ./comet67p/node_modules/coveralls/bin/coveralls.js
+	cat ./coverage.info | ./node_modules/coveralls/bin/coveralls.js
 
 clean:
 	rm coverage.info 2> /dev/null || true
