@@ -59,7 +59,7 @@ module.exports = function(grunt) {
 
     bowercopy: {
       options: {
-        srcPrefix: 'rosetta/bower_components'
+        srcPrefix: 'bower_components'
       },
       scripts: {
         options: {
