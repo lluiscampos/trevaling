@@ -13,6 +13,7 @@
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "particle-api-js": "^5.3.0",
+    "request": "^2.72.0",
     "taffy": "^2.6.2"
   },
   "devDependencies": {
