@@ -10,7 +10,8 @@ app.get('/viewer', function(request, response) {
       response.status(500).send(err);
     }
     else {
-      response.json(data);
+      var first_trip = data[0]
+      response.json(first_trip);
     }
   });
 });
