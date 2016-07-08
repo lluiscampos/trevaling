@@ -36,8 +36,8 @@ build_comet67p:
 	npm install
 
 build_rosetta:
-	npm install
-	grunt build
+	cd rosetta && npm install
+	cd rosetta && grunt build
 
 build_philae:
 	cd philae && make
@@ -51,7 +51,7 @@ lint_comet67p:
 	npm run comet67p_lint || touch error
 
 lint_rosetta:
-	grunt lint || touch error
+	cd rosetta && grunt lint || touch ../error
 
 lint_philae:
 	cd philae && make lint || touch ../error
@@ -64,7 +64,7 @@ test_comet67p:
 	npm run comet67p_test-cov || touch error
 
 test_rosetta:
-	grunt test || touch error
+	cd rosetta && grunt test || touch ../error
 
 test_philae:
 	cd philae && make test || touch ../error
@@ -88,5 +88,6 @@ coveralls: coverage.info
 
 clean:
 	rm coverage.info 2> /dev/null || true
-	grunt clean
+	cd comet67p && grunt clean
+	cd rosetta && grunt clean
 	cd philae && make clean

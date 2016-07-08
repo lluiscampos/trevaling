@@ -9,15 +9,15 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     eslint: {
-      src: ['rosetta/src/**/*.js']
+      src: ['src/**/*.js']
     },
 
     browserify: {
       coverage: {
         files: {
-          'rosetta/test/instrumented-app/models/BaseModel.js': 'rosetta/src/app/models/BaseModel.js',
-          'rosetta/test/instrumented-app/models/TripModel.js': 'rosetta/src/app/models/TripModel.js',
-          'rosetta/test/instrumented-app/views/TripView.js'  : 'rosetta/src/app/views/TripView.js'
+          'test/instrumented-app/models/BaseModel.js': 'src/app/models/BaseModel.js',
+          'test/instrumented-app/models/TripModel.js': 'src/app/models/TripModel.js',
+          'test/instrumented-app/views/TripView.js'  : 'src/app/views/TripView.js'
         },
         options: {
           transform: [istanbul]
@@ -30,11 +30,11 @@ module.exports = function(grunt) {
         log: true,
         reporter: 'Spec',
         coverage: {
-          lcovReport: 'rosetta/coverage'
+          lcovReport: 'coverage'
         }
       },
       test: {
-          src: ['rosetta/test/index.html']
+          src: ['test/index.html']
       }
     },
 
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
       options: {
         port: 13337,
         hostname: 'localhost',
-        db: 'rosetta/api.json'
+        db: 'api.json'
       },
       dev : {}
     },
@@ -50,9 +50,9 @@ module.exports = function(grunt) {
     copy: {
       app: {
         files: [
-          {src: 'rosetta/src/index.html', dest: 'rosetta/www/index.html'},
-          {expand: true, cwd: 'rosetta/src', src: ['*.css'],   dest: 'rosetta/www/css/', filter: 'isFile'},
-          {expand: true, cwd: 'rosetta/src', src: ['**/*.js'], dest: 'rosetta/www/js/',  filter: 'isFile'}
+          {src: 'src/index.html', dest: 'www/index.html'},
+          {expand: true, cwd: 'src', src: ['*.css'],   dest: 'www/css/', filter: 'isFile'},
+          {expand: true, cwd: 'src', src: ['**/*.js'], dest: 'www/js/',  filter: 'isFile'}
         ]
       }
     },
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
       },
       scripts: {
         options: {
-          destPrefix: 'rosetta/www'
+          destPrefix: 'www'
         },
         files: {
           'css/bootstrap.css'         : 'bootstrap/dist/css/bootstrap.css',
@@ -84,12 +84,12 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      build: ['rosetta/www'],
-      tests: ['rosetta/coverage', 'rosetta/test/instrumented-app']
+      build: ['www'],
+      tests: ['coverage', 'test/instrumented-app']
     },
 
     watch: {
-      files: ['rosetta/src/**/*'],
+      files: ['src/**/*'],
       tasks: ['copy']
     },
 
