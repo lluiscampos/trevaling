@@ -5,6 +5,8 @@
     "no-console": "off"
   },
   "env": {
-    "node": true
+    "node": true,
+    "browser": true,
+    "amd": true
   }
 }
