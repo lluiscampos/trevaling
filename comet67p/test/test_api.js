@@ -3,9 +3,16 @@ var should  = require('chai').should();
 var request = require("request");
 
 var server  = require('../src/server.js');
-server();
+var app = require('express')();
 
 describe("Comet67P API", function() {
+
+  before(function(done){
+    app.use('/', server)
+    app.listen(3000, function() {
+      done();
+    });
+  });
 
   describe("GET api/viewer", function() {
 
@@ -31,10 +38,8 @@ describe("Comet67P API", function() {
     it("trip data is parsable", function(done) {
       request(url, function(error, response, body) {
         var data = JSON.parse(body);
-        data.should.be.an('array');
-        data[0].should.exist;
-        data[0].should.contain.all.keys('id', 'trace');
-        data[0].trace.should.be.an('array');
+        data.should.contain.all.keys('id', 'trace');
+        data.trace.should.be.an('array');
         //TODO: Create some dummy entries
         //data[0].trace[0].should.have.all.keys('time', 'lat', 'lng');
 
