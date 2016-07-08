@@ -1,9 +1,9 @@
 
-var app     = require('express')();
-
 var dataman = require('./dataman');
 dataman.init();
 
+var express = require('express');
+var app = express.Router();
 app.get('/viewer', function(request, response) {
   dataman.viewer({}, function(err, data) {
     if (err) {
@@ -15,11 +15,4 @@ app.get('/viewer', function(request, response) {
   });
 });
 
-var start = function()
-{
-  app.listen(3000, function() {
-    console.log('[comet67p] Listening port 3000');
-  });
-}
-
-module.exports = start;
+module.exports = app;
