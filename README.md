@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/lluiscampos/trevaling.svg?branch=master)](https://travis-ci.org/lluiscampos/trevaling)
 [![Coverage Status](https://coveralls.io/repos/github/lluiscampos/trevaling/badge.svg?branch=master)](https://coveralls.io/github/lluiscampos/trevaling?branch=master)
+[![Dependencies Status](https://david-dm.org/lluiscampos/trevaling.svg)](https://david-dm.org/lluiscampos/trevaling)
 
 Trevaling is about traveling, traveling is about learning, learning is about coding, and coding is about trevaling
 ```
