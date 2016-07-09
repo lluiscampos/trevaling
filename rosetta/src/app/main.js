@@ -18,7 +18,7 @@ define(
       var p = new TripModel();
       new TripView({model: p});
 
-      var poller = BackbonePoller.get(p, {delay: [1000, 60000, 2]});
+      var poller = BackbonePoller.get(p, {delay: [1000, 10000, 2]});
       poller.start();
     });
 
