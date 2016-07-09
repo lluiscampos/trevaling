@@ -33,7 +33,7 @@ philae: error_clear build_philae lint_philae test_philae error_check
 #########################
 
 build_comet67p:
-	cd comet67p && npm install
+	npm install
 
 build_rosetta:
 	cd rosetta && npm install
@@ -48,7 +48,7 @@ build_philae:
 #########################
 
 lint_comet67p:
-	cd comet67p && grunt lint || touch ../error
+	npm run comet67p_lint || touch error
 
 lint_rosetta:
 	cd rosetta && grunt lint || touch ../error
@@ -61,7 +61,7 @@ lint_philae:
 #########################
 
 test_comet67p:
-	cd comet67p && npm run test-cov || touch ../error
+	npm run comet67p_test-cov || touch error
 
 test_rosetta:
 	cd rosetta && grunt test || touch ../error
@@ -84,7 +84,7 @@ coverage.info: comet67p/coverage/lcov.info rosetta/coverage/lcov.info philae/cov
 	lcov -a comet67p/coverage/lcov.info -a rosetta/coverage/lcov.info -a philae/coverage.info -q -o coverage.info
 
 coveralls: coverage.info
-	cat ./coverage.info | ./comet67p/node_modules/coveralls/bin/coveralls.js
+	cat ./coverage.info | ./node_modules/coveralls/bin/coveralls.js
 
 clean:
 	rm coverage.info 2> /dev/null || true

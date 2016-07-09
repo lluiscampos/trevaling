@@ -1,0 +1,41 @@
+{
+  "name": "trevaling",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node main.js",
+    "comet67p_lint": "./node_modules/.bin/eslint comet67p/src",
+    "comet67p_test": "./node_modules/.bin/mocha --reporter spec comet67p/test",
+    "comet67p_test-cov": "./node_modules/.bin/istanbul cover --dir comet67p/coverage --root comet67p/src --include-all-sources node_modules/mocha/bin/_mocha -- --reporter spec comet67p/test"
+  },
+  "description": "Trevaling is about traveling, traveling is about learning, learning is about coding, and coding is about trevaling",
+  "main": "comet67p/src/main.js",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "particle-api-js": "^5.3.0",
+    "request": "^2.72.0",
+    "taffy": "^2.6.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "eslint": "^3.0.1",
+    "istanbul": "^0.4.4",
+    "mocha": "^2.5.3",
+    "mocha-lcov-reporter": "^1.2.0",
+    "nock": "^8.0.0",
+    "request": "^2.72.0",
+    "sinon": "^1.17.4",
+    "tmp": "0.0.28"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lluiscampos/trevaling.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lluiscampos/trevaling/issues"
+  },
+  "homepage": "https://github.com/lluiscampos/trevaling#readme"
+}

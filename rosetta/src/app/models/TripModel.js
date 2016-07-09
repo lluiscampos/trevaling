@@ -12,7 +12,7 @@ define(
 
     var TripModel = BaseModel.extend({
 
-      url: 'http://localhost:13337/trips/first-trip',
+      url: 'viewer',
 
       defaults: {
         id: "loading..."

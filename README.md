@@ -73,12 +73,12 @@ npm install
 
 Run lint:
 ```
-grunt lint
+npm run comet67p_lint
 ```
 
 Run tests (with coverage):
 ```
-npm test-cov
+npm run comet67p_test-cov
 ```
 
 Set the following environment variables in an .env file:
@@ -88,7 +88,7 @@ OPEN_SIGNAL_API_KEY=<your_api_key_here>
 
 Start server:
 ```
-npm start
+npm comet67p_start
 ```
 
 ## Philae

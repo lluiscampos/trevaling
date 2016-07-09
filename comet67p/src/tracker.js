@@ -30,7 +30,7 @@ var listen = function(params, callback)
       var deviceId = devices.body[0].id;
 
       particle.getEventStream({deviceId: deviceId, auth: token }).then(function(stream) {
-        console.log("Listening to events...")
+        console.log("[comet67p] Listening to events")
         stream.on('event', function(event) {
           if (event.name === 'current-position')
           {
