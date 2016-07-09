@@ -43,13 +43,11 @@ apt-get install nodejs-legacy
 
 ## Rosetta
 
-Install dependencies:
+Roseta is an HTML/javascript static frontend to follow the current trevaling.
+
+Install dependencies and build the app:
 ```
 npm install
-```
-
-Build the app:
-```
 grunt build
 ```
 
@@ -67,6 +65,8 @@ grunt test
 
 ## Comet67P
 
+Comet67P is a node.js module responsable for tracking the current trevaling and serving the API with all the data
+
 Install dependencies:
 ```
 npm install
@@ -82,17 +82,24 @@ Run tests (with coverage):
 npm run comet67p_test-cov
 ```
 
-Set the following environment variables in an .env file:
+Start application:
 ```
-OPEN_SIGNAL_API_KEY=<your_api_key_here>
+npm start
 ```
 
-Start server:
+### environment variables
+
+Comet67p module requires access to your device on [Particle Cloud](https://www.particle.io/) and to [Open Signal API](https://opensignal.3scale.net/login).
+
+Tokens to these APIs shall be provided as environment variables in an .env file or directly on the node.js process:
 ```
-npm comet67p_start
+OPEN_SIGNAL_API_KEY=<your_api_key_here>
+PARTICLE_CLOUD_TOKEN=<your_token_here>
 ```
 
 ## Philae
+
+Philae is a particle.io firmware that reads network identification information and publish it through the cloud
 
 ### Standalone mode on PC
 
