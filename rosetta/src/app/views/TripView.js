@@ -16,11 +16,11 @@ define(
 
     var TripView = Backbone.View.extend({
 
-      el: "#magic",
+      el: "#mapid",
 
       map: null,
 
-      template: Handlebars.compile('<div class="starter-template"><h1>trevaling...{{id}}</h1></div>'),
+      template: null,
 
       events: {
 
@@ -33,8 +33,6 @@ define(
       },
 
       render: function() {
-        this.$el.html(this.template(this.model.toJSON()));
-
         _.each(this.model.get('trace'), function(position, index){
           var title = '[' + index + '] ' + position.published_at
           Leaflet.marker(
