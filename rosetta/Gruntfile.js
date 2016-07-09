@@ -40,7 +40,7 @@ module.exports = function(grunt) {
 
     json_server: {
       options: {
-        port: 13337,
+        port: 8080,
         hostname: 'localhost',
         db: 'api.json'
       },

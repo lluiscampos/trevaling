@@ -12,6 +12,8 @@ define(
 
     var TripModel = BaseModel.extend({
 
+      //TODO: fix so that it still works on dev mode (serve static html from grunt?)
+      //url: 'http://localhost:8080/viewer',
       url: 'viewer',
 
       defaults: {
