@@ -91,6 +91,7 @@ void Philae::setup(void)
 
 void Philae::loop(void)
 {
+  const unsigned long sleep_time = 120 * 1000;
 //TODO: Find a way to get the develop console conditionally compiled
 #if 0
   int incomingByte = 0;
@@ -113,7 +114,7 @@ void Philae::loop(void)
       //TODO: Get some failure statistics
     }
   }
-  delay(10000);
+  delay(sleep_time);
 }
 
 const char * Philae::get_position()
