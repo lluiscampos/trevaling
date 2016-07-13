@@ -19,7 +19,7 @@ TESTOBJ := $(patsubst $(TSTDIR)/%,$(BUILDDIR)/%,$(TESTS:.$(SRCEXT)=.o))
 CC := g++
 CFLAGS := -std=c++11 -g -Wall --coverage
 
-VERSION := $(shell git describe --always --dirty)
+VERSION := $(shell git describe --tags --always --dirty)
 
 $(TARGET): $(OBJECTS) $(HEADERS)
 	@mkdir -p $(BINDIR)
