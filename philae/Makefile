@@ -54,6 +54,6 @@ coverage: test
 	genhtml coverage.info --output-directory coverage
 
 particle:
-	particle compile electron src/main.ino $(SOURCES) $(HEADERS) --saveTo $(BINDIR)/firmware_$(VERSION).bin
+	particle compile electron --target 0.5.1 src/main.ino $(SOURCES) $(HEADERS) --saveTo $(BINDIR)/firmware_$(VERSION).bin
 
 .PHONY: clean test coverage particle
