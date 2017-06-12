@@ -9,10 +9,18 @@ var convert = function(params, callback) {
     return;
   }
 
-  var apikey = process.env.OPEN_SIGNAL_API_KEY || 'OPEN_SIGNAL_API_KEY';
+  var apikey = process.env.MLS_API_KEY || 'test'
 
-  var url = 'http://api.opensignal.com/v2/towerinfo.json?cid=' + params.cid + '&lac=' + params.lac +'&apikey=' + apikey;
-  request(url, function (error, response, body) {
+  var url = 'https://location.services.mozilla.com/v1/geolocate?key=' + apikey;
+
+  var post_params = {
+    "cellTowers": [{
+      "locationAreaCode": params.lac,
+      "cellId": params.cid,
+    }]
+  };
+
+  request.post(url, params, function (error, response, body) {
     if (error) {
       callback(new Error('request returned error ' + error))
     }
@@ -21,14 +29,15 @@ var convert = function(params, callback) {
     }
     else {
       var obj = JSON.parse(body);
-      if (obj.hasOwnProperty('tower1')) {
-        callback(null, {lat: obj.tower1.est_lat, lng: obj.tower1.est_lng})
+      if (obj.hasOwnProperty('location')) {
+        console.log(body)
+        callback(null, {lat: obj.location.lat, lng: obj.location.lng})
       }
-      else if (obj.hasOwnProperty('towers') && obj.towers === "No towers with these identifiers") {
-        callback(new Error(obj.towers))
+      else if (obj.hasOwnProperty('error')) {
+        callback(new Error(JSON.stringify(obj.error)))
       }
       else {
-        callback(new Error('Unable to parse coordinates information from responose ' + body))
+        callback(new Error('Unknown response ' + JSON.stringify(obj)))
       }
     }
   })

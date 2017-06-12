@@ -8,25 +8,20 @@ describe("Cell2Coords module", function() {
 
   describe("Translate cellular info into coordinates", function() {
 
-    var api_resp = {"apiVersion":"2","CID":"1234","LAC":"5678","phone_type":"GSM",
-        "SID":null,"network_id":null,"perMinuteCurrent":0,"perMinuteLimit":10,
-        "perMonthCurrent":34,"perMonthLimit":2000,"tower1":{"phone_type":"GSM","psc":0,
-        "cid":1234,"lac":5678,"est_lat":"12.3456789","est_lng":"98.7654321",
-        "est_acc":"236.7925","est_stddev":"0.25","2G":0,"3G":1,"4G":0,"network_id_main":2420,
-        "network_ids_json_out":"NULL"}};
+    var api_resp = {"location": {"lat": 59.905, "lng": 10.7487}, "accuracy": 1000.0};
 
     before(function(){
-      nock('http://api.opensignal.com')
-        .get(/v2\/towerinfo\.json\?cid=\d+&lac=\d+&apikey=\w+$/)
+      nock('https://location.services.mozilla.com')
+        .post(/v1\/geolocate\?key=\w+$/)
         .reply(200, JSON.stringify(api_resp));
     });
 
     it("converts {cid, lac} into {lat,lng}", function(done) {
 
-      cell2coords({cid: 1234, lac: 5678}, function(error, coords) {
+      cell2coords({cid: 13542127, lac: 20601}, function(error, coords) {
         should.not.exist(error);
-        coords.lat.should.equal('12.3456789');
-        coords.lng.should.equal('98.7654321');
+        coords.lat.should.equal(59.905);
+        coords.lng.should.equal(10.7487);
 
         done();
       });
@@ -37,13 +32,12 @@ describe("Cell2Coords module", function() {
 
   describe("Handles unknown identifiers", function() {
 
-    var api_resp = {"apiVersion":"2","CID":"1234","LAC":"5678","phone_type":"GSM",
-        "SID":null,"network_id":null,"perMinuteCurrent":0,"perMinuteLimit":10,
-        "perMonthCurrent":38,"perMonthLimit":2000,"towers":"No towers with these identifiers"};
+    var api_resp = {"error":{"errors":[{"domain":"geolocation","reason":"notFound",
+        "message":"Not found",}],"code": 404,"message":"Not found"}}
 
     before(function(){
-      nock('http://api.opensignal.com')
-        .get(/v2\/towerinfo\.json\?cid=\d+&lac=\d+&apikey=\w+$/)
+      nock('https://location.services.mozilla.com')
+        .post(/v1\/geolocate\?key=\w+$/)
         .reply(200, JSON.stringify(api_resp));
     });
 
@@ -52,7 +46,7 @@ describe("Cell2Coords module", function() {
       cell2coords({cid: 1234, lac: 5678}, function(error, coords) {
         should.exist(error);
         error.should.be.an('Error');
-        error.message.should.equal('No towers with these identifiers');
+        error.message.should.equal(JSON.stringify(api_resp.error));
 
         done();
       });
@@ -64,9 +58,9 @@ describe("Cell2Coords module", function() {
   describe("Handle HTTP errors", function() {
 
     before(function(){
-      nock('http://api.opensignal.com')
-      .get(/./g)
-      .reply(404, 'This page could not be found');
+      nock('https://location.services.mozilla.com')
+        .post(/v1\/geolocate\?key=\w+$/)
+        .reply(404, 'This page could not be found');
     });
 
     it("propagates error from HTTP 404", function(done) {
