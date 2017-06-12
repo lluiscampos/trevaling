@@ -20,7 +20,7 @@ var convert = function(params, callback) {
     }]
   };
 
-  request.post(url, params, function (error, response, body) {
+  request.post(url, post_params, function (error, response, body) {
     if (error) {
       callback(new Error('request returned error ' + error))
     }
