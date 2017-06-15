@@ -1,4 +1,6 @@
 
+var logger = require('./logger').cell2coords;
+
 var request = require('request');
 require('dotenv').config();
 
@@ -30,7 +32,7 @@ var convert = function(params, callback) {
     else {
       var obj = JSON.parse(body);
       if (obj.hasOwnProperty('location')) {
-        console.log(body)
+        logger.debug('got location from API', body)
         callback(null, {lat: obj.location.lat, lng: obj.location.lng})
       }
       else if (obj.hasOwnProperty('error')) {

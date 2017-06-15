@@ -1,8 +1,10 @@
 {
   "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
   "rules": {
-    "no-trailing-spaces": "error",
-    "no-console": "off"
+    "no-trailing-spaces": "error"
   },
   "env": {
     "node": true

@@ -1,4 +1,6 @@
 
+var logger = require('./logger').tracker;
+
 require('dotenv').config();
 var cell2coords = require('./cell2coords');
 var dataman = require('./dataman');
@@ -30,7 +32,7 @@ var listen = function(params, callback)
       var deviceId = devices.body[0].id;
 
       particle.getEventStream({deviceId: deviceId, auth: token }).then(function(stream) {
-        console.log("[comet67p] Listening to events")
+        logger.info("Listening to events")
         stream.on('event', function(event) {
           if (event.name === 'current-position')
           {
@@ -38,7 +40,7 @@ var listen = function(params, callback)
 
             cell2coords({cid: data.ci, lac: data.lac}, function(err, coords) {
               if (err) {
-                console.log("[cell2coords] Logging error:", err)
+                logger.error("[cell2coords] Logging error:", err)
               }
               else {
                 dataman.philae({
@@ -47,13 +49,13 @@ var listen = function(params, callback)
                   'lng' : coords.lng
                 }, function(err) {
                   if (err) {
-                    console.log("[dataman] Logging error:", err)
+                    logger.error("[dataman] Logging error:", err)
                   }
                 });
               }
             });
           }
-          console.log("Adding to logger:", event)
+          logger.info("Adding to logger:", event)
         });
       });
 

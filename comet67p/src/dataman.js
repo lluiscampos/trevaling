@@ -1,4 +1,6 @@
 
+var logger = require('./logger').dataman;
+
 require('dotenv').config();
 
 var fs    = require('fs');
@@ -71,7 +73,10 @@ var database_init = function() {
 
   if (write_file) {
     fs.writeFileSync(db_filename, JSON.stringify(DATABASE().get()), 'utf-8');
+    logger.info('new dabatase file created');
   }
+
+  logger.info('dabatase initialized');
 }
 
 module.exports = {
