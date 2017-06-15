@@ -1,4 +1,7 @@
 
+/* Get the env from config file */
+require('dotenv').config();
+
 /* Get settings from OpenShift */
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'

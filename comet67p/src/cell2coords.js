@@ -2,7 +2,6 @@
 var logger = require('./logger').cell2coords;
 
 var request = require('request');
-require('dotenv').config();
 
 var convert = function(params, callback) {
 

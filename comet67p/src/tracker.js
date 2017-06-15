@@ -1,7 +1,6 @@
 
 var logger = require('./logger').tracker;
 
-require('dotenv').config();
 var cell2coords = require('./cell2coords');
 var dataman = require('./dataman');
 

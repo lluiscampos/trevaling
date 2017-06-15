@@ -1,8 +1,6 @@
 
 var logger = require('./logger').dataman;
 
-require('dotenv').config();
-
 var fs    = require('fs');
 var taffy = require('taffy');
 
