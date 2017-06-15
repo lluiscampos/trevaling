@@ -39,7 +39,7 @@ var listen = function(params, callback)
 
             cell2coords({cid: data.ci, lac: data.lac}, function(err, coords) {
               if (err) {
-                logger.error("[cell2coords] Logging error:", err)
+                logger.error("Error from cell2coords", err)
               }
               else {
                 dataman.philae({
@@ -48,13 +48,13 @@ var listen = function(params, callback)
                   'lng' : coords.lng
                 }, function(err) {
                   if (err) {
-                    logger.error("[dataman] Logging error:", err)
+                    logger.error("Error from dataman", err)
                   }
                 });
               }
             });
           }
-          logger.info("Adding to logger:", event)
+          logger.info("Got event from philae", event)
         });
       });
 
