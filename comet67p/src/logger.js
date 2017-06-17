@@ -2,6 +2,7 @@
 var winston = require('winston');
 
 var log_level = process.env.LOG_LEVEL || 'debug'
+var log_file  = process.env.LOG_FILE  || 'trevaling.log'
 
 const log_formatter = function(options) {
   return options.level.toUpperCase() + ' ' + options.timestamp() + ' ' +
@@ -26,7 +27,7 @@ for (let label of loggers_labels) {
       timestamp: timestamp,
       formatter: log_formatter,
       level: log_level,
-      filename: 'fileAll.log',
+      filename: log_file,
       json: false,
     }),
     new (winston.transports.Console)({
