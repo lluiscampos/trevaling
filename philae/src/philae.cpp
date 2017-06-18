@@ -29,6 +29,8 @@ const char* dev_command_to_str(philae_dev_command_t command_id)
   {
     case PHILAE_DEV_NETWORK_REGISTRATION_STATUS:
       return "PHILAE_DEV_NETWORK_REGISTRATION_STATUS";
+    case PHILAE_DEV_OPERATOR_SELECTION:
+      return "PHILAE_DEV_OPERATOR_SELECTION";
     case PHILAE_DEV_PRINT_CURRENT_POSITION:
       return "PHILAE_DEV_PRINT_CURRENT_POSITION";
     case PHILAE_DEV_PUBLISH_CURRENT_POSITION:
@@ -45,6 +47,25 @@ void Philae::process_dev_command(philae_dev_command_t command_id)
   if (command_id == PHILAE_DEV_NETWORK_REGISTRATION_STATUS)
   {
     this->retreive_and_update_position();
+  }
+  if (command_id == PHILAE_DEV_OPERATOR_SELECTION)
+  {
+    cellular_operator_list_t cell_list = {0};
+    cellular_cmd_operator_selection(&cell_list);
+
+    Serial.printf("OPERATORS LIST (%d)\r\n", cell_list.len);
+    for (unsigned int i = 0; i < cell_list.len; i++)
+    {
+      Serial.printf("[%d]: %d,%d,0x%x,0x%x,0x%x,%d,%d\r\n", i,
+          cell_list.list[i].mcc,
+          cell_list.list[i].mnc,
+          cell_list.list[i].lac,
+          cell_list.list[i].ci,
+          cell_list.list[i].bsic,
+          cell_list.list[i].arfcn,
+          cell_list.list[i].rxlev );
+    }
+    Serial.printf("DONE\r\n");
   }
   else if (command_id == PHILAE_DEV_PRINT_CURRENT_POSITION)
   {
@@ -91,10 +112,21 @@ void Philae::setup(void)
 
 void Philae::loop(void)
 {
-  const unsigned long sleep_time = 120 * 1000;
 //TODO: Find a way to get the develop console conditionally compiled
-#if 0
+#if 1
+  const unsigned long sleep_time = 1 * 1000;
+  Serial.printf(".");
   int incomingByte = 0;
+
+  if (Serial.available() > 1)
+  {
+    Serial.printf("flush %d bytes\r\n", Serial.available());
+    while (Serial.available())
+    {
+      incomingByte = Serial.read();
+      Serial.printf("flush%c\r\n", incomingByte);
+    }
+  }
 
   if (Serial.available() > 0)
   {
@@ -102,8 +134,11 @@ void Philae::loop(void)
 
     this->process_dev_command((philae_dev_command_t)incomingByte);
   }
-#endif
+  delay(sleep_time);
 
+#else
+
+  const unsigned long sleep_time = 120 * 1000;
   this->retreive_and_update_position();
   if (this->position_changed())
   {
@@ -115,6 +150,7 @@ void Philae::loop(void)
     }
   }
   delay(sleep_time);
+#endif
 }
 
 const char * Philae::get_position()
