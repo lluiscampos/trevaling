@@ -51,7 +51,8 @@ const char * Philae::operator_list_to_json(cellular_operator_list_t cell_list)
 
   for (unsigned int i = 0; i < cell_list.len; i++)
   {
-    sprintf(str + strlen(str), "{\"mcc\":%d,\"mnc\":%d,\"lac\":%d,\"ci\":%d,\"bsic\":%d,\"arfcn\":%d,\"rxlev\":%d},",
+    sprintf(str + strlen(str),
+        "{\"mcc\":%d,\"mnc\":%d,\"lac\":%d,\"ci\":%d,\"bsic\":%d,\"arfcn\":%d,\"rxlev\":%d},",
         cell_list.list[i].mcc,
         cell_list.list[i].mnc,
         cell_list.list[i].lac,
