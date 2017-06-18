@@ -224,17 +224,20 @@ void Philae::loop(void)
       //TODO: Get some failure statistics
     }
   }
-
-  this->retreive_and_update_position();
-  if (this->position_changed())
+  else
   {
-    bool retval;
-    retval = Particle.publish("current-position", this->get_position(), 60, PRIVATE);
-    if (not retval)
+    this->retreive_and_update_position();
+    if (this->position_changed())
     {
-      //TODO: Get some failure statistics
+      bool retval;
+      retval = Particle.publish("current-position", this->get_position(), 60, PRIVATE);
+      if (not retval)
+      {
+        //TODO: Get some failure statistics
+      }
     }
   }
+
   delay(sleep_time);
 #endif
 }
