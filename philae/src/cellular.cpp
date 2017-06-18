@@ -257,13 +257,13 @@ bool cellular_cmd_operator_selection(
   int final_result = false;
 
   /* TODO: Do we really need to probe before scanning? */
-  Serial.println("[ AT+COPS=? ]");
+  Serial.printf("[ AT+COPS=? ]\r\n");
   ret = Cellular.command(callbackSTRING, &data, 3*60000, "AT+COPS=?\r\n");
 
   /* Do scan if probe went fine */
   if (ret == RESP_OK)
   {
-    Serial.println("[ AT+COPS=5 ]");
+    Serial.printf("[ AT+COPS=5 ]\r\n");
     ret = Cellular.command(callbackCOPS, p_cellular_operator_list, 3*60000, "AT+COPS=5\r\n");
     if (ret == RESP_OK)
     {
@@ -272,11 +272,11 @@ bool cellular_cmd_operator_selection(
   }
   if (final_result)
   {
-    Serial.println("\r\nScan complete!");
+    Serial.printf("\r\nScan complete!\r\n");
   }
   else
   {
-     Serial.println("\r\nScan incomplete! Power cycle the modem and try again.");
+     Serial.printf("\r\nScan incomplete! Power cycle the modem and try again.\r\n");
   }
 
   return final_result;
