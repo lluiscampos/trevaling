@@ -60,7 +60,12 @@ var listen = function(params, callback)
 
     },
     function(err) {
-      callback(new Error ('List devices call failed: ' + err));
+      callback(new Error ('List devices call failed: ' + JSON.stringify(err)));
+    }
+  )
+  .catch(
+    (err) => {
+      logger.error('Catch error: ' + err);
     }
   );
 }
