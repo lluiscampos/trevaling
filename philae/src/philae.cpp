@@ -41,7 +41,7 @@ const char* dev_command_to_str(philae_dev_command_t command_id)
   }
 }
 
-const char * Philae::operator_list_to_json(cellular_operator_list_t cell_list)
+const char * Philae::operator_list_to_json_all(cellular_operator_list_t cell_list)
 {
   static char str[1024];
 
@@ -63,6 +63,28 @@ const char * Philae::operator_list_to_json(cellular_operator_list_t cell_list)
   }
 
   sprintf(str + strlen(str) - 1, "]}");
+
+  return str;
+}
+
+const char * Philae::operator_list_to_json(cellular_operator_list_t cell_list)
+{
+  static char str[1024];
+
+  sprintf(str, "[");
+
+  for (unsigned int i = 0; i < cell_list.len; i++)
+  {
+    sprintf(str + strlen(str),
+        "{\"mcc\":%d,\"mnc\":%d,\"lac\":%d,\"ci\":%d,\"rxlev\":%d},",
+        cell_list.list[i].mcc,
+        cell_list.list[i].mnc,
+        cell_list.list[i].lac,
+        cell_list.list[i].ci,
+        cell_list.list[i].rxlev );
+  }
+
+  sprintf(str + strlen(str) - 1, "]");
 
   return str;
 }

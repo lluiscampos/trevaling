@@ -36,6 +36,7 @@ public:
   void retreive_and_update_position();
   bool position_changed();
 
+  const char* operator_list_to_json_all(cellular_operator_list_t cell_list);
   const char* operator_list_to_json(cellular_operator_list_t cell_list);
 
 private:
