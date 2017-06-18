@@ -89,6 +89,27 @@ const char * Philae::operator_list_to_json(cellular_operator_list_t cell_list)
   return str;
 }
 
+void Philae::operator_list_sort_by_rxlev(cellular_operator_list_t* p_cell_list)
+{
+  cellular_operator_t cell_info_tmp;
+
+  for (unsigned int i = 0 ; i < ( p_cell_list->len - 1); i++)
+  {
+    for (unsigned int j = 0 ; j < (p_cell_list->len - i - 1); j++)
+    {
+      if (p_cell_list->list[j].rxlev > p_cell_list->list[j+1].rxlev)
+      {
+        memcpy((void *)&cell_info_tmp, (void *)&p_cell_list->list[j],
+            sizeof(cellular_operator_t));
+        memcpy((void *)&p_cell_list->list[j], (void *)&p_cell_list->list[j+1],
+            sizeof(cellular_operator_t));
+        memcpy((void *)&p_cell_list->list[j+1], (void *)&cell_info_tmp,
+            sizeof(cellular_operator_t));
+      }
+    }
+  }
+}
+
 void Philae::process_dev_command(philae_dev_command_t command_id)
 {
   Serial.printf("Processing %s...\r\n", dev_command_to_str(command_id));
@@ -191,6 +212,11 @@ void Philae::loop(void)
   cellular_operator_list_t cell_list = {0};
   if (cellular_cmd_operator_selection(&cell_list))
   {
+    this->operator_list_sort_by_rxlev(&cell_list);
+
+    /* Send only the 4 closest antennas */
+    cell_list.len = 4;
+
     bool retval;
     retval = Particle.publish("cellular-list", this->operator_list_to_json(cell_list), 60, PRIVATE);
     if (not retval)

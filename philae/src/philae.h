@@ -38,6 +38,7 @@ public:
 
   const char* operator_list_to_json_all(cellular_operator_list_t cell_list);
   const char* operator_list_to_json(cellular_operator_list_t cell_list);
+  void operator_list_sort_by_rxlev(cellular_operator_list_t* p_cell_list);
 
 private:
 

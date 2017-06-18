@@ -98,4 +98,32 @@ BOOST_AUTO_TEST_CASE(test_Philae_operator_list_to_json)
   BOOST_CHECK_EQUAL( p.operator_list_to_json(cell_list), expected);
 }
 
+BOOST_AUTO_TEST_CASE(test_Philae_operator_list_sort_by_rxlev)
+{
+  cellular_operator_list_t cell_list = {0};
+  cell_list.len = 9;
+  cell_list.list[0].rxlev = 37;
+  cell_list.list[1].rxlev = 45;
+  cell_list.list[2].rxlev = 1;
+  cell_list.list[3].rxlev = 23;
+  cell_list.list[4].rxlev = 50;
+  cell_list.list[5].rxlev = 18;
+  cell_list.list[6].rxlev = 63;
+  cell_list.list[7].rxlev = 54;
+  cell_list.list[8].rxlev = 3;
+
+  Philae p;
+  p.operator_list_sort_by_rxlev(&cell_list);
+
+  BOOST_CHECK_EQUAL(cell_list.list[0].rxlev, 1);
+  BOOST_CHECK_EQUAL(cell_list.list[1].rxlev, 3);
+  BOOST_CHECK_EQUAL(cell_list.list[2].rxlev, 18);
+  BOOST_CHECK_EQUAL(cell_list.list[3].rxlev, 23);
+  BOOST_CHECK_EQUAL(cell_list.list[4].rxlev, 37);
+  BOOST_CHECK_EQUAL(cell_list.list[5].rxlev, 45);
+  BOOST_CHECK_EQUAL(cell_list.list[6].rxlev, 50);
+  BOOST_CHECK_EQUAL(cell_list.list[7].rxlev, 54);
+  BOOST_CHECK_EQUAL(cell_list.list[8].rxlev, 63);
+}
+
 BOOST_AUTO_TEST_SUITE_END( )
