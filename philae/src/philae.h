@@ -3,6 +3,8 @@
 #ifndef PHILAE_H
 #define PHILAE_H
 
+#include "cellular.h"
+
 enum philae_dev_command_t
 {
   PHILAE_DEV_NETWORK_REGISTRATION_STATUS = (int) '3',
@@ -29,10 +31,12 @@ public:
   void setup(void);
   void loop(void);
 
-  const char* get_position();
+  const char* get_position(void);
   void set_position(unsigned int local_area_code, long unsigned int cell_id);
   void retreive_and_update_position();
   bool position_changed();
+
+  const char* operator_list_to_json(cellular_operator_list_t cell_list);
 
 private:
 

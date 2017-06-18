@@ -4,6 +4,7 @@
   #include "application.h"
 #else
   #include <stdio.h>
+  #include <string.h>
   #include "particle_mock.h"
 #endif
 #include "cellular.h"
@@ -38,6 +39,31 @@ const char* dev_command_to_str(philae_dev_command_t command_id)
     default:
       return "(unknown)";
   }
+}
+
+const char * Philae::operator_list_to_json(cellular_operator_list_t cell_list)
+{
+  static char str[1024];
+
+  sprintf(str, "{\"len\":%d,\"list\":[",
+    cell_list.len
+  );
+
+  for (unsigned int i = 0; i < cell_list.len; i++)
+  {
+    sprintf(str + strlen(str), "{\"mcc\":%d,\"mnc\":%d,\"lac\":%d,\"ci\":%d,\"bsic\":%d,\"arfcn\":%d,\"rxlev\":%d},",
+        cell_list.list[i].mcc,
+        cell_list.list[i].mnc,
+        cell_list.list[i].lac,
+        cell_list.list[i].ci,
+        cell_list.list[i].bsic,
+        cell_list.list[i].arfcn,
+        cell_list.list[i].rxlev );
+  }
+
+  sprintf(str + strlen(str) - 1, "]}");
+
+  return str;
 }
 
 void Philae::process_dev_command(philae_dev_command_t command_id)
@@ -113,7 +139,7 @@ void Philae::setup(void)
 void Philae::loop(void)
 {
 //TODO: Find a way to get the develop console conditionally compiled
-#if 1
+#if 0
   const unsigned long sleep_time = 1 * 1000;
   Serial.printf(".");
   int incomingByte = 0;
@@ -137,8 +163,19 @@ void Philae::loop(void)
   delay(sleep_time);
 
 #else
-
   const unsigned long sleep_time = 120 * 1000;
+
+  cellular_operator_list_t cell_list = {0};
+  if (cellular_cmd_operator_selection(&cell_list))
+  {
+    bool retval;
+    retval = Particle.publish("cellular-list", this->operator_list_to_json(cell_list), 60, PRIVATE);
+    if (not retval)
+    {
+      //TODO: Get some failure statistics
+    }
+  }
+
   this->retreive_and_update_position();
   if (this->position_changed())
   {
