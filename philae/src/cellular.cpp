@@ -38,9 +38,9 @@ const char* at_resp_type_to_str(int type)
 
 
 /* Debug functions */
-
 void debug_print_callback(int type, const char* buf, int len)
 {
+#if 0
   Serial.printf("[debug] callback type 0x%06x %s len %d\r\n", type, at_resp_type_to_str(type), len);
 
   char line[1024+64];
@@ -52,6 +52,7 @@ void debug_print_callback(int type, const char* buf, int len)
   {
     Serial.printf("<buf>%s</buf>\r\n", buf);
   }
+#endif
 }
 
 
