@@ -207,7 +207,7 @@ void Philae::loop(void)
   delay(sleep_time);
 
 #else
-  const unsigned long sleep_time = 120 * 1000;
+  const unsigned long sleep_time = 300 * 1000;
 
   cellular_operator_list_t cell_list = {0};
   if (cellular_cmd_operator_selection(&cell_list))
