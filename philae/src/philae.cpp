@@ -215,12 +215,15 @@ void Philae::loop(void)
     this->operator_list_sort_by_rxlev(&cell_list);
 
     /* Send only the 4 closest antennas */
-    cell_list.len = 4;
-
-    /* Check that the json fits in 255 bytes, else send only 3 antennas */
-    if (strlen(this->operator_list_to_json(cell_list)) > 255)
+    if (cell_list.len > 4)
     {
-      cell_list.len = 3;
+      cell_list.len = 4;
+
+      /* Check that the json fits in 255 bytes, else send only 3 antennas */
+      if (strlen(this->operator_list_to_json(cell_list)) > 255)
+      {
+        cell_list.len = 3;
+      }
     }
 
     bool retval;
