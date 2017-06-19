@@ -43,7 +43,7 @@ const char* dev_command_to_str(philae_dev_command_t command_id)
 
 const char * Philae::operator_list_to_json_all(cellular_operator_list_t cell_list)
 {
-  static char str[1024];
+  static char str[1024] = {0};
 
   sprintf(str, "{\"len\":%d,\"list\":[",
     cell_list.len
@@ -52,7 +52,7 @@ const char * Philae::operator_list_to_json_all(cellular_operator_list_t cell_lis
   for (unsigned int i = 0; i < cell_list.len; i++)
   {
     sprintf(str + strlen(str),
-        "{\"mcc\":%d,\"mnc\":%d,\"lac\":%d,\"ci\":%d,\"bsic\":%d,\"arfcn\":%d,\"rxlev\":%d},",
+        "{\"mcc\":%d,\"mnc\":%d,\"lac\":%u,\"ci\":%u,\"bsic\":%u,\"arfcn\":%d,\"rxlev\":%d},",
         cell_list.list[i].mcc,
         cell_list.list[i].mnc,
         cell_list.list[i].lac,
@@ -69,14 +69,14 @@ const char * Philae::operator_list_to_json_all(cellular_operator_list_t cell_lis
 
 const char * Philae::operator_list_to_json(cellular_operator_list_t cell_list)
 {
-  static char str[1024];
+  static char str[1024] = {0};
 
   sprintf(str, "[");
 
   for (unsigned int i = 0; i < cell_list.len; i++)
   {
     sprintf(str + strlen(str),
-        "{\"mcc\":%d,\"mnc\":%d,\"lac\":%d,\"ci\":%d,\"rxlev\":%d},",
+        "{\"mcc\":%d,\"mnc\":%d,\"lac\":%u,\"ci\":%u,\"rxlev\":%d},",
         cell_list.list[i].mcc,
         cell_list.list[i].mnc,
         cell_list.list[i].lac,
