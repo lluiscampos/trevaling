@@ -69,6 +69,7 @@ var convert_list = function(params, callback) {
   }
 
   var post_params = {
+    "radioType" : "gsm",
     "cellTowers": cell_towers
   };
 
