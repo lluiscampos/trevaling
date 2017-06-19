@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE TestPhylae
+#define BOOST_TEST_MODULE TestPhilae
 #include <boost/test/included/unit_test.hpp>
 
 #include "particle_mock.h"
