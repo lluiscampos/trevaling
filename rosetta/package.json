@@ -5,7 +5,6 @@
     "browserify-istanbul": "^2.0.0",
     "chai": "^3.5.0",
     "grunt": "^1.0.1",
-    "grunt-bowercopy": "^1.2.4",
     "grunt-browserify": "^5.0.0",
     "grunt-concurrent": "^2.3.0",
     "grunt-contrib-clean": "^1.0.0",
