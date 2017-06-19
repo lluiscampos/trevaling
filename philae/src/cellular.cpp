@@ -155,12 +155,12 @@ bool cmd_network_registration_status_get(
 }
 
 /* Parses COPS response:
-     [MCC:<MCC>, MNC:<MNC>, LAC:<LAC>, CI:<CI>, BSIC:<BSIC>, Arfcn:<Arfcn>, RxLev:<RxLev>
+     [MCC:<MCC>, MNC:<MNC>, LAC:<LAC>, CI:<CI>, BSIC:<BSIC>, Arfcn:<Arfcn>, RXLEV:<RXLEV>
 */
 bool cellular_cellular_operator_parse(const char* buf,
             cellular_operator_t* p_cellular_operator)
 {
-  if ( sscanf(buf, "\r\nMCC:%d, MNC:%d, LAC:%x, CI:%x, BSIC:%x, Arfcn:%5d, RxLev:%3d\r\n",
+  if ( sscanf(buf, "\r\nMCC:%d, MNC:%d, LAC:%x, CI:%x, BSIC:%x, Arfcn:%5d, RXLEV:%3d\r\n",
         &p_cellular_operator->mcc,
         &p_cellular_operator->mnc,
         &p_cellular_operator->lac,

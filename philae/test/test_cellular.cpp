@@ -24,7 +24,7 @@ BOOST_AUTO_TEST_CASE(test_cellular_cellular_operator_parse)
   cellular_operator_t cellular_operator;
   memset(&cellular_operator, 0, sizeof(cellular_operator_t));
 
-  const char line[] = "MCC:222, MNC: 88, LAC:55fa, CI:ffff, BSIC:3f, Arfcn:00104, RxLev:037";
+  const char line[] = "MCC:222, MNC: 88, LAC:55fa, CI:ffff, BSIC:3f, Arfcn:00104, RXLEV:037";
 
   BOOST_CHECK(cellular_cellular_operator_parse(line, &cellular_operator));
 
