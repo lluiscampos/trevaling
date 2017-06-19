@@ -53,6 +53,26 @@ var listen = function(params, callback)
               }
             });
           }
+          else if (event.name === 'cellular-list') {
+            let data = JSON.parse(event.data);
+
+            cell2coords.list(data, function(err, coords) {
+              if (err) {
+                logger.error("Error from cell2coords", err)
+              }
+              else {
+                dataman.philae({
+                  'time': event.published_at,
+                  'lat' : coords.lat,
+                  'lng' : coords.lng
+                }, function(err) {
+                  if (err) {
+                    logger.error("Error from dataman", err)
+                  }
+                });
+              }
+            });
+          }
           logger.info("Got event from philae", event)
         });
       });
