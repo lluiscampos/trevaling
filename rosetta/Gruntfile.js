@@ -51,35 +51,22 @@ module.exports = function(grunt) {
       app: {
         files: [
           {src: 'src/index.html', dest: 'www/index.html'},
+          {src: 'node_modules/bootstrap/dist/css/bootstrap.css', dest: 'www/css/bootstrap.css'},
+          {src: 'node_modules/normalize-css/normalize.css',      dest: 'www/css/normalize.css'},
+          {src: 'node_modules/leaflet/dist/leaflet.css', dest: 'www/css/leaflet.css'},
+          {src: 'node_modules/leaflet/dist/images/layers*', dest: 'www/css/images'},
+          {src: 'node_modules/requirejs/require.js', dest: 'www/js/libs/require.js'},
+          {src: 'node_modules/bootstrap/dist/js/bootstrap.js', dest: 'www/js/libs/bootstrap.js'},
+          {src: 'node_modules/jquery/dist/jquery.js', dest: 'www/js/libs/jquery.js'},
+          {src: 'node_modules/underscore/underscore.js', dest: 'www/js/libs/underscore.js'},
+          {src: 'node_modules/backbone/backbone.js', dest: 'www/js/libs/backbone.js'},
+          {src: 'node_modules/backbone-poller/backbone.poller.js', dest: 'www/js/libs/backbone-poller.js'},
+          {src: 'node_modules/handlebars/dist/handlebars.js', dest: 'www/js/libs/handlebars.js'},
+          {src: 'node_modules/leaflet/dist/leaflet-src.js', dest: 'www/js/libs/leaflet.js'},
+          {src: 'node_modules/leaflet/dist/images/marker*', dest: 'www/js/libs/images'},
           {expand: true, cwd: 'src', src: ['*.css'],   dest: 'www/css/', filter: 'isFile'},
           {expand: true, cwd: 'src', src: ['**/*.js'], dest: 'www/js/',  filter: 'isFile'}
         ]
-      }
-    },
-
-    bowercopy: {
-      options: {
-        srcPrefix: 'bower_components'
-      },
-      scripts: {
-        options: {
-          destPrefix: 'www'
-        },
-        files: {
-          'css/bootstrap.css'         : 'bootstrap/dist/css/bootstrap.css',
-          'css/normalize.css'         : 'normalize-css/normalize.css',
-          'css/leaflet.css'           : 'leaflet/dist/leaflet.css',
-          'css/images'                : 'leaflet/dist/images/layers*',
-          'js/libs/require.js'        : 'requirejs/require.js',
-          'js/libs/bootstrap.js'      : 'bootstrap/dist/js/bootstrap.js',
-          'js/libs/jquery.js'         : 'jquery/dist/jquery.js',
-          'js/libs/underscore.js'     : 'underscore/underscore.js',
-          'js/libs/backbone.js'       : 'backbone/backbone.js',
-          'js/libs/backbone-poller.js': 'backbone-poller/backbone.poller.js',
-          'js/libs/handlebars.js'     : 'handlebars/handlebars.js',
-          'js/libs/leaflet.js'        : 'leaflet/dist/leaflet-src.js',
-          'js/libs/images'            : 'leaflet/dist/images/marker*'
-        }
       }
     },
 
@@ -107,13 +94,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-concurrent');
-  grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-json-server');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-mocha-phantom-istanbul');
 
   grunt.registerTask('lint', ['eslint']);
-  grunt.registerTask('build', ['copy:app', 'bowercopy']);
+  grunt.registerTask('build', ['copy:app']);
   grunt.registerTask('test', ['browserify:coverage', 'mocha']);
   grunt.registerTask('run', ['build', 'concurrent:dev']);
   grunt.registerTask('default', ['clean', 'lint', 'build', 'test']);
