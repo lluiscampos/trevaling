@@ -65,7 +65,8 @@ var listen = function(params, callback)
                   dataman.philae({
                     'time': event.published_at,
                     'lat' : coords.lat,
-                    'lng' : coords.lng
+                    'lng' : coords.lng,
+                    'acc' : coords.acc
                   }, function(err) {
                     if (err) {
                       logger.error("Error from dataman", err)

@@ -85,7 +85,7 @@ var convert_list = function(params, callback) {
       var obj = JSON.parse(body);
       if (obj.hasOwnProperty('location')) {
         logger.debug('got location from API', body)
-        callback(null, {lat: obj.location.lat, lng: obj.location.lng})
+        callback(null, {'lat': obj.location.lat, 'lng': obj.location.lng, 'acc': obj.accuracy})
       }
       else if (obj.hasOwnProperty('error')) {
         callback(new Error(JSON.stringify(obj.error)))
