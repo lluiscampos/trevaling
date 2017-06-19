@@ -167,7 +167,7 @@ bool cellular_cellular_operator_parse(const char* buf,
         &p_cellular_operator->ci,
         &p_cellular_operator->bsic,
         &p_cellular_operator->arfcn,
-        &p_cellular_operator->rxlev ) > 0 )
+        &p_cellular_operator->rxlev ) == 7 )
   {
     return true;
   }
@@ -206,6 +206,11 @@ int callbackCOPS(int type, const char* buf, int len,
         memcpy((void *)p_dest, &cellular_operator, sizeof(cellular_operator_t));
 
         p_cellular_operator_list->len++;
+      }
+      else
+      {
+        /* TODO: Save error */
+        Serial.printf("[callbackCOPS] error, cannot parse line %s\r\n", line);
       }
     }
   }
