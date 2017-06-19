@@ -18,7 +18,7 @@ describe("Cell2Coords module", function() {
 
     it("converts {cid, lac} into {lat,lng}", function(done) {
 
-      cell2coords({cid: 13542127, lac: 20601}, function(error, coords) {
+      cell2coords.single({cid: 13542127, lac: 20601}, function(error, coords) {
         should.not.exist(error);
         coords.lat.should.equal(59.905);
         coords.lng.should.equal(10.7487);
@@ -43,7 +43,7 @@ describe("Cell2Coords module", function() {
 
     it("throws error for uknown identifiers", function(done) {
 
-      cell2coords({cid: 1234, lac: 5678}, function(error, coords) {
+      cell2coords.single({cid: 1234, lac: 5678}, function(error, coords) {
         should.exist(error);
         error.should.be.an('Error');
         error.message.should.equal(JSON.stringify(api_resp.error));
@@ -65,7 +65,7 @@ describe("Cell2Coords module", function() {
 
     it("propagates error from HTTP 404", function(done) {
 
-      cell2coords({cid: 1234, lac: 5678}, function(error, coords) {
+      cell2coords.single({cid: 1234, lac: 5678}, function(error, coords) {
         should.exist(error);
         error.should.be.an('Error');
         error.message.should.equal('API call returned status code 404');

@@ -3,7 +3,7 @@ var logger = require('./logger').cell2coords;
 
 var request = require('request');
 
-var convert = function(params, callback) {
+var convert_single = function(params, callback) {
 
   if ( (params.cid === undefined) || (params.lac === undefined) ) {
     callback(new Error ("Invalid parameters, object must have keys {cid, lac}"));
@@ -44,4 +44,6 @@ var convert = function(params, callback) {
   })
 };
 
-module.exports = convert;
+module.exports = {
+  'single': convert_single
+}

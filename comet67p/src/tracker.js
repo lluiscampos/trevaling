@@ -27,17 +27,16 @@ var login = function(params, callback)
 var listen = function(params, callback)
 {
   particle.listDevices({ auth: token }).then(
-    function(devices){
+    function(devices) {
       var deviceId = devices.body[0].id;
 
       particle.getEventStream({deviceId: deviceId, auth: token }).then(function(stream) {
         logger.info("Listening to events")
         stream.on('event', function(event) {
-          if (event.name === 'current-position')
-          {
+          if (event.name === 'current-position') {
             var data = JSON.parse(event.data);
 
-            cell2coords({cid: data.ci, lac: data.lac}, function(err, coords) {
+            cell2coords.single({cid: data.ci, lac: data.lac}, function(err, coords) {
               if (err) {
                 logger.error("Error from cell2coords", err)
               }
