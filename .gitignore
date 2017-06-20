@@ -11,3 +11,5 @@ rosetta/www
 coverage.info
 node_modules
 .env
+*db.json
+trevaling.log

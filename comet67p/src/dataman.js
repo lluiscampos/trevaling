@@ -31,11 +31,7 @@ var philae = function(params, callback) {
     return;
   }
 
-  DATABASE().first().trace.push({
-    'time': params.time,
-    'lat' : params.lat,
-    'lng' : params.lng
-  });
+  DATABASE().first().trace.push(params);
 
   _database_save(function(err){
     if (err) {

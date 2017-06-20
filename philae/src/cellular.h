@@ -31,4 +31,31 @@ bool cmd_network_registration_status_parse(
             const char* buf,
             cmd_network_registration_status_t* p_network_registration_status);
 
+#define CELLULAR_OPERATOR_MAX 16
+
+struct cellular_operator_t
+{
+  int mcc;           /* Mobile Country Code Mobile Country Code, range 0 - 999 (3 digits). */
+  int mnc;           /* Mobile Network Code, range 0 - 999 (1 to 3 digits). */
+  unsigned int lac;  /* Location Area Code, range 0h-FFFFh (2 octets) */
+  unsigned int ci;   /* Cell Identity: for 2G cell: range 0h-FFFFh (2 octets) */
+  unsigned int bsic; /* Base Station Identify Code, range 0h-3Fh (6 bits) */
+  int arfcn;         /* Absolute Radio Frequency Channel Number, range 0 - 1023 or INVALID_ARFCN */
+  int rxlev;         /* Received signal level on the cell, range 0 - 63 or 255 (not available) */
+};
+
+struct cellular_operator_list_t
+{
+  unsigned int len;
+  cellular_operator_t list[CELLULAR_OPERATOR_MAX];
+};
+
+bool cellular_cmd_operator_selection(
+            cellular_operator_list_t* p_cellular_operator_list_t);
+
+
+bool cellular_cellular_operator_parse(
+            const char* buf,
+            cellular_operator_t* p_cellular_operator);
+
 #endif

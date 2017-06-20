@@ -27,32 +27,58 @@ var login = function(params, callback)
 var listen = function(params, callback)
 {
   particle.listDevices({ auth: token }).then(
-    function(devices){
+    function(devices) {
       var deviceId = devices.body[0].id;
 
       particle.getEventStream({deviceId: deviceId, auth: token }).then(function(stream) {
         logger.info("Listening to events")
         stream.on('event', function(event) {
-          if (event.name === 'current-position')
-          {
-            var data = JSON.parse(event.data);
+          try {
+            if (event.name === 'current-position') {
+              var data = JSON.parse(event.data);
 
-            cell2coords({cid: data.ci, lac: data.lac}, function(err, coords) {
-              if (err) {
-                logger.error("Error from cell2coords", err)
-              }
-              else {
-                dataman.philae({
-                  'time': event.published_at,
-                  'lat' : coords.lat,
-                  'lng' : coords.lng
-                }, function(err) {
-                  if (err) {
-                    logger.error("Error from dataman", err)
-                  }
-                });
-              }
-            });
+              cell2coords.single({cid: data.ci, lac: data.lac}, function(err, coords) {
+                if (err) {
+                  logger.error("Error from cell2coords", err)
+                }
+                else {
+                  dataman.philae({
+                    'time': event.published_at,
+                    'lat' : coords.lat,
+                    'lng' : coords.lng
+                  }, function(err) {
+                    if (err) {
+                      logger.error("Error from dataman", err)
+                    }
+                  });
+                }
+              });
+            }
+            else if (event.name === 'cellular-list') {
+              let data = JSON.parse(event.data);
+
+              cell2coords.list(data, function(err, coords) {
+                if (err) {
+                  logger.error("Error from cell2coords", err)
+                }
+                else {
+                  dataman.philae({
+                    'time': event.published_at,
+                    'lat' : coords.lat,
+                    'lng' : coords.lng,
+                    'acc' : coords.acc
+                  }, function(err) {
+                    if (err) {
+                      logger.error("Error from dataman", err)
+                    }
+                  });
+                }
+              });
+            }
+          }
+          catch(err)
+          {
+            logger.error('Catch error: ' + err);
           }
           logger.info("Got event from philae", event)
         });
@@ -60,7 +86,12 @@ var listen = function(params, callback)
 
     },
     function(err) {
-      callback(new Error ('List devices call failed: ' + err));
+      callback(new Error ('List devices call failed: ' + JSON.stringify(err)));
+    }
+  )
+  .catch(
+    (err) => {
+      logger.error('Catch error: ' + err);
     }
   );
 }

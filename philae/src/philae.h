@@ -3,9 +3,12 @@
 #ifndef PHILAE_H
 #define PHILAE_H
 
+#include "cellular.h"
+
 enum philae_dev_command_t
 {
-  PHILAE_DEV_NETWORK_REGISTRATION_STATUS = (int) '1',
+  PHILAE_DEV_NETWORK_REGISTRATION_STATUS = (int) '3',
+  PHILAE_DEV_OPERATOR_SELECTION          = (int) '4',
 
   PHILAE_DEV_PRINT_CURRENT_POSITION      = (int) '5',
   PHILAE_DEV_PUBLISH_CURRENT_POSITION    = (int) '6'
@@ -28,10 +31,14 @@ public:
   void setup(void);
   void loop(void);
 
-  const char* get_position();
+  const char* get_position(void);
   void set_position(unsigned int local_area_code, long unsigned int cell_id);
   void retreive_and_update_position();
   bool position_changed();
+
+  const char* operator_list_to_json_all(cellular_operator_list_t cell_list);
+  const char* operator_list_to_json(cellular_operator_list_t cell_list);
+  void operator_list_sort_by_rxlev(cellular_operator_list_t* p_cell_list);
 
 private:
 

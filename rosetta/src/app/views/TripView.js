@@ -28,7 +28,7 @@ define(
 
       initialize: function() {
         this.listenTo(this.model, "change", this.render);
-        this.map = Leaflet.map('mapid').setView([0, 0], 12);
+        this.map = Leaflet.map('mapid').setView([0, 0], 10);
         Leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map);
       },
 

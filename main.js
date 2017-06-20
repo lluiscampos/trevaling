@@ -15,7 +15,12 @@ var server  = require('./comet67p/src/server')
 var tracker = require('./comet67p/src/tracker')
 
 /* Start listening for philae events */
-tracker.listen();
+tracker.listen(null, function(err) {
+  if (err) {
+    console.log("Cannot start tracker: " + err);
+    process.exit(1);
+  }
+});
 
 /* Load rosetta static web */
 var www = express.static('rosetta/www');
