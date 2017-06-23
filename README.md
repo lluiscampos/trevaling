@@ -31,9 +31,9 @@ curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 apt-get install nodejs npm
 ```
 
-Once nodejs and npm are installed, install grunt and bower:
+Once nodejs and npm are installed, install grunt:
 ```
-npm install -g grunt bower
+npm install -g grunt
 ```
 
 Tip: install nodejs-legacy or create a manual symlink to deal with legacy code expecting "node" to be nodejs on Ubuntu/Debian systems.
