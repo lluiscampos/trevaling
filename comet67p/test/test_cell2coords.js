@@ -11,8 +11,8 @@ describe("Cell2Coords module", function() {
     var api_resp = {"location": {"lat": 59.905, "lng": 10.7487}, "accuracy": 1000.0};
 
     before(function(){
-      nock('https://location.services.mozilla.com')
-        .post(/v1\/geolocate\?key=\w+$/)
+      nock('https://www.googleapis.com')
+        .post(/geolocation\/v1\/geolocate\?key=\w+$/)
         .reply(200, JSON.stringify(api_resp));
     });
 
@@ -36,8 +36,8 @@ describe("Cell2Coords module", function() {
         "message":"Not found",}],"code": 404,"message":"Not found"}}
 
     before(function(){
-      nock('https://location.services.mozilla.com')
-        .post(/v1\/geolocate\?key=\w+$/)
+      nock('https://www.googleapis.com')
+        .post(/geolocation\/v1\/geolocate\?key=\w+$/)
         .reply(200, JSON.stringify(api_resp));
     });
 
@@ -58,8 +58,8 @@ describe("Cell2Coords module", function() {
   describe("Handle HTTP errors", function() {
 
     before(function(){
-      nock('https://location.services.mozilla.com')
-        .post(/v1\/geolocate\?key=\w+$/)
+      nock('https://www.googleapis.com')
+        .post(/geolocation\/v1\/geolocate\?key=\w+$/)
         .reply(404, 'This page could not be found');
     });
 
