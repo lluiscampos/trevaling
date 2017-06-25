@@ -3,8 +3,8 @@ var logger = require('./logger').cell2coords;
 
 var request = require('request');
 
-var apikey = process.env.GOOGLE_GEOLOCATION_KEY || 'test'
-var url = 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + apikey;
+var apikey = process.env.MLS_API_KEY || 'test';
+var url = 'https://location.services.mozilla.com/v1/geolocate?key=' + apikey;
 
 var convert_single = function(params, callback) {
 
@@ -45,7 +45,6 @@ var convert_list = function(params, callback) {
 
   var post_params = {
     "radioType" : "gsm",
-    "considerIp": false,
     "cellTowers": cell_towers
   };
 
