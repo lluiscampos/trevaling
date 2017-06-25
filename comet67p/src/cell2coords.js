@@ -45,6 +45,7 @@ var convert_list = function(params, callback) {
 
   var post_params = {
     "radioType" : "gsm",
+    "considerIp": false,
     "cellTowers": cell_towers
   };
 
