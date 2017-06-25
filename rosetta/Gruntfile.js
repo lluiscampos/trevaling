@@ -50,10 +50,14 @@ module.exports = function(grunt) {
     copy: {
       app: {
         files: [
+          /* Index */
           {src: 'src/index.html', dest: 'www/index.html'},
+          /* CSS */
           {src: 'node_modules/bootstrap/dist/css/bootstrap.css', dest: 'www/css/bootstrap.css'},
           {src: 'node_modules/normalize-css/normalize.css',      dest: 'www/css/normalize.css'},
           {src: 'node_modules/leaflet/dist/leaflet.css', dest: 'www/css/leaflet.css'},
+          {expand: true, cwd: 'node_modules/leaflet/dist/images', src: ['layers*.png'], dest: 'www/css/images/', filter: 'isFile'},
+          /* JS libs */
           {src: 'node_modules/requirejs/require.js', dest: 'www/js/libs/require.js'},
           {src: 'node_modules/bootstrap/dist/js/bootstrap.js', dest: 'www/js/libs/bootstrap.js'},
           {src: 'node_modules/jquery/dist/jquery.js', dest: 'www/js/libs/jquery.js'},
@@ -62,7 +66,8 @@ module.exports = function(grunt) {
           {src: 'node_modules/backbone-poller/backbone.poller.js', dest: 'www/js/libs/backbone-poller.js'},
           {src: 'node_modules/handlebars/dist/handlebars.js', dest: 'www/js/libs/handlebars.js'},
           {src: 'node_modules/leaflet/dist/leaflet-src.js', dest: 'www/js/libs/leaflet.js'},
-          {expand: true, cwd: 'node_modules/leaflet/dist/images', src: ['*.png'], dest: 'www/css/images/', filter: 'isFile'},
+          {expand: true, cwd: 'node_modules/leaflet/dist/images', src: ['marker*.png'], dest: 'www/js/libs/images/', filter: 'isFile'},
+          /* Project files */
           {expand: true, cwd: 'src', src: ['*.css'],   dest: 'www/css/', filter: 'isFile'},
           {expand: true, cwd: 'src', src: ['**/*.js'], dest: 'www/js/',  filter: 'isFile'}
         ]
